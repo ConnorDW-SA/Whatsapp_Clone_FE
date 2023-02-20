@@ -34,3 +34,19 @@
     z-index: 0;
   }
 }
+
+.home {
+  height: 100%;
+}
+
+.side-view {
+  width: 30%;
+  height: 100%;
+  background-color: aqua;
+}
+
+.chat-view {
+  width: 70%;
+  height: 100%;
+  background-color: salmon;
+}
