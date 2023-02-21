@@ -50,3 +50,23 @@
   height: 100%;
   background-color: salmon;
 }
+
+.side-header {
+  padding-inline: 1rem;
+  padding-block: 0.625rem;
+  background-color: #f0f2f5;
+}
+
+.my-icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: bisque;
+  cursor: pointer;
+}
+
+.header-icon {
+  padding: 0.5rem;
+  color: #54656f;
+  cursor: pointer;
+}
