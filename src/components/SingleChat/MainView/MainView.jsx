@@ -1,11 +1,11 @@
-import ChatHeader from "./ChatHeader";
+import MainHeader from "./MainHeader";
 import MessagesList from "./MessagesList";
 import MessageInput from "./MessageInput";
 
 function MainView() {
   return (
     <div className="main-view d-flex flex-column justify-content-between">
-      <ChatHeader />
+      <MainHeader />
       <MessagesList />
       <MessageInput />
     </div>

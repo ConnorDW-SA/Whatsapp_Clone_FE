@@ -2,6 +2,7 @@
   height: 100vh;
   background-color: #e3e2de;
   z-index: 100;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .window {
@@ -45,8 +46,75 @@
   background-color: aqua;
 }
 
+.main-view {
+  width: 70%;
+  height: 100%;
+}
+
+/* Conversations -------------------------------------------------- */
+
+/* Login card -------------------------------------------------- */
+
 .chat-view {
   width: 70%;
   height: 100%;
   background-color: #f0f2f5;
+  border-bottom: 7px solid rgb(62, 202, 62);
 }
+
+/* Login card -------------------------------------------------- */
+
+/* Header -------------------------------------------------- */
+
+.main-header-convo {
+  height: 8%;
+  background-color: #f0f2f5;
+}
+
+.thumbnail-header {
+  width: 40px;
+  height: 40px;
+}
+
+/* Header -------------------------------------------------- */
+
+/* Main -------------------------------------------------- */
+
+.convo-div {
+  background-image: url("./components/SingleChat/icons/BG.png");
+  background-color: #f4f1eb;
+  background-size: fill;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.message-container {
+  max-width: fit-content;
+  word-break: break-word;
+  white-space: normal;
+  font-size: 0.9rem;
+}
+/* Main -------------------------------------------------- */
+
+/* Footer -------------------------------------------------- */
+
+.convo-footer {
+  background-color: #f0f2f5;
+  height: 8%;
+}
+
+.message-input {
+  border-color: transparent !important;
+}
+
+.message-input:focus {
+  outline: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Footer -------------------------------------------------- */
+
+/* Conversations -------------------------------------------------- */

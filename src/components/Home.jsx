@@ -1,6 +1,6 @@
 import React from "react";
 import SideView from "./SideView";
-import MainView from "./SingleChat/MainViewLogin";
+import MainView from "./SingleChat/MainView/MainView";
 
 function Home() {
   return (
