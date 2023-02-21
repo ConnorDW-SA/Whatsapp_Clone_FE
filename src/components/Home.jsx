@@ -1,11 +1,10 @@
 import React from "react";
 import SideView from "./SideView";
-import MainView from "./MainView";
+import MainView from "./SingleChat/MainViewLogin";
 
 function Home() {
   return (
     <div className="home d-flex">
-      <img src="./stolen/phone.svg" alt="phone" className="phone" />
       <SideView />
       <MainView />
     </div>
