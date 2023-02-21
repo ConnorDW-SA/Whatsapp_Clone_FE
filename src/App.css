@@ -70,3 +70,28 @@
   color: #54656f;
   cursor: pointer;
 }
+
+.search-container {
+  background-color: white;
+  padding-inline: 1rem;
+  padding-block: 0.625rem;
+  height: 56pxpx;
+}
+
+.search-bar {
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  color: #54656f;
+}
+
+.input {
+  background-color: #f0f2f5;
+  border: none;
+  height: 35px;
+  width: 200px;
+  font-size: 15px;
+}
+
+.input:focus {
+  outline: none;
+}
