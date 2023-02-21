@@ -3,7 +3,7 @@ import ChatCard from "./ChatCard";
 
 function Chats() {
   return (
-    <div>
+    <div className="chats-container">
       <ChatCard />
       <ChatCard />
       <ChatCard />
