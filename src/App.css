@@ -42,7 +42,7 @@
 .side-view {
   width: 30%;
   height: 100%;
-  background-color: aqua;
+  background-color: #f0f2f5;
 }
 
 .chat-view {
@@ -55,6 +55,7 @@
   padding-inline: 1rem;
   padding-block: 0.625rem;
   background-color: #f0f2f5;
+  height: 59px;
 }
 
 .my-icon {
@@ -75,7 +76,8 @@
   background-color: white;
   padding-inline: 1rem;
   padding-block: 0.625rem;
-  height: 56pxpx;
+  height: 49px;
+  width: 100%;
 }
 
 .search-bar {
@@ -88,10 +90,51 @@
   background-color: #f0f2f5;
   border: none;
   height: 35px;
-  width: 200px;
+  width: 100%;
   font-size: 15px;
+  border-radius: 8px;
 }
 
 .input:focus {
   outline: none;
+}
+
+.filter-chats {
+  cursor: pointer;
+}
+
+.chats-container {
+  background-color: #f0f2f5;
+  overflow: auto;
+  height: calc(100% - 108px);
+  width: 100%;
+  overflow: auto;
+  padding-inline: 1rem;
+  padding-block: 0.625rem;
+}
+
+.chat-card {
+  width: 100%;
+  height: 72px;
+}
+
+.chats-profile {
+  width: 49px;
+  height: 49px;
+}
+
+.profile-name {
+  font-weight: 500;
+}
+
+.chat-preview {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 235px;
+  font-size: 0.8rem;
+}
+
+.chat-date {
+  font-size: 0.8rem;
 }

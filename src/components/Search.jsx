@@ -18,8 +18,8 @@ function Search() {
           />
         </form>
       </div>
-      <div className="px-2">
-        <Filter />
+      <div className="pl-2">
+        <Filter className="filter-chats" />
       </div>
     </div>
   );
