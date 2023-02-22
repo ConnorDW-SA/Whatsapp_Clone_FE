@@ -16,6 +16,9 @@ function SideHeader() {
   ];
 
   const [optionsClicked, setOptionsClicked] = useState(false);
+  const [groupClicked, setGroupClicked] = useState(false);
+  const [circleClicked, setCircleClicked] = useState(false);
+  const [chatClicked, setChatClicked] = useState(false);
 
   return (
     <div className="side-header d-flex justify-content-between">
@@ -29,28 +32,43 @@ function SideHeader() {
         <Dropdown textContent={textContent} />
       </div>
       <div>
-        <Profile
-          className="my-icon"
-          onClick={() => {
-            setOptionsClicked(!optionsClicked);
-          }}
-        />
+        <Profile className="my-icon" />
       </div>
 
       <div className="d-flex align-items-center">
-        <div className="header-icon">
+        <div
+          onClick={() => {
+            setGroupClicked(!groupClicked);
+          }}
+          className={groupClicked ? "header-icon-clicked" : "header-icon"}
+        >
           <Group />
         </div>
 
-        <div className="header-icon">
+        <div
+          onClick={() => {
+            setCircleClicked(!circleClicked);
+          }}
+          className={circleClicked ? "header-icon-clicked" : "header-icon"}
+        >
           <Circle />
         </div>
 
-        <div className="header-icon">
+        <div
+          onClick={() => {
+            setChatClicked(!chatClicked);
+          }}
+          className={chatClicked ? "header-icon-clicked" : "header-icon"}
+        >
           <Chat />
         </div>
 
-        <div className="header-icon relative">
+        <div
+          onClick={() => {
+            setOptionsClicked(!optionsClicked);
+          }}
+          className={optionsClicked ? "header-icon-clicked" : "header-icon"}
+        >
           <ThreeDots
             onClick={() => {
               setOptionsClicked(!optionsClicked);

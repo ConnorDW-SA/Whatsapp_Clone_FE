@@ -68,6 +68,7 @@
   background-color: #f0f2f5;
   height: 59px;
   position: relative;
+  border-right: 1px solid #d9dadc;
 }
 
 .my-icon {
@@ -84,6 +85,14 @@
   cursor: pointer;
 }
 
+.header-icon-clicked {
+  padding: 0.5rem;
+  color: #54656f;
+  cursor: pointer;
+  background-color: lightgray;
+  border-radius: 50%;
+}
+
 .relative {
   position: relative;
 }
@@ -94,10 +103,15 @@
   left: 0;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .absolute-options {
   position: absolute;
   top: 100%;
   right: 1rem;
+  z-index: 10;
 }
 
 .dropdown-ul {
@@ -400,13 +414,23 @@
 /* Header -------------------------------------------------- */
 
 .main-header-convo {
-  height: 8%;
+  height: 59px;
   background-color: #f0f2f5;
 }
 
 .thumbnail-header {
   width: 40px;
   height: 40px;
+}
+
+.target-user {
+  font-weight: 500;
+}
+
+.last-seen {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #54656f;
 }
 
 /* Header -------------------------------------------------- */
@@ -443,15 +467,14 @@
   background-color: #d9fdd3;
 }
 
-.person-one-messages {
-}
 /* Main -------------------------------------------------- */
 
 /* Footer -------------------------------------------------- */
 
 .convo-footer {
   background-color: #f0f2f5;
-  height: 8%;
+  height: 59px;
+  border-left: 1px solid #d9dadc;
 }
 
 .message-input {
