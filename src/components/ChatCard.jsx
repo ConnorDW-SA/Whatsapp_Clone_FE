@@ -1,7 +1,9 @@
 import React from "react";
 import { ReactComponent as Profile } from "./icons/profile.svg";
 
-function ChatCard() {
+function ChatCard(props) {
+  const chat = props.chat;
+
   return (
     <div className="chat-card d-flex">
       <div>
