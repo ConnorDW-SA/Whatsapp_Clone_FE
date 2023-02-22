@@ -7,13 +7,13 @@ import MainView from "./SingleChat/MainView/MainView";
 
 function Home() {
   const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("accessToken");
 
   const fetchMyChats = async () => {
     try {
       const response = await fetch("http://localhost:3001/chats", {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y1ZjA3NWIzYmFiODJmZDI3Y2I2NDMiLCJpYXQiOjE2NzcwODEwODQsImV4cCI6MTY3NzY4NTg4NH0.aOuypBL6P6QhzcDirkOGDoI_0GBPX0ujrksjcWEuAAE",
+          Authorization: `Bearer ${accessToken}`,
         },
       });
       if (response) {

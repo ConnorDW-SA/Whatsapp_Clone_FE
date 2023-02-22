@@ -5,6 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ChatCard(props) {
   const chat = props.chat;
+  const lastMessage = chat.messages[chat.messages.length - 1];
+  console.log(lastMessage);
+  const currentUser = useSelector((state) => state.home.userInfo);
+  const accessToken = localStorage.getItem("accessToken");
+  const targetUser = chat.users.find(
+    (user) => user.username !== currentUser.username
+  );
   const activeChat = useSelector((state) => state.home.chats.active);
 
   const dispatch = useDispatch();
@@ -13,8 +20,7 @@ function ChatCard(props) {
     try {
       const response = await fetch(`http://localhost:3001/chats/${chat._id}`, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y1ZjA3NWIzYmFiODJmZDI3Y2I2NDMiLCJpYXQiOjE2NzcwODEwODQsImV4cCI6MTY3NzY4NTg4NH0.aOuypBL6P6QhzcDirkOGDoI_0GBPX0ujrksjcWEuAAE",
+          Authorization: `Bearer ${accessToken}`,
         },
       });
       if (response) {
@@ -41,12 +47,12 @@ function ChatCard(props) {
       </div>
       <div className="chat-prev-border flex-grow-1 pl-3">
         <div className="d-flex justify-content-between align-items-center">
-          <div className="profile-name">Name</div>
-          <div className="chat-date">14/02/2023</div>
+          <div className="profile-name">{targetUser.username}</div>
+          <div className="chat-date">
+            {lastMessage && lastMessage.createdAt}
+          </div>
         </div>
-        <div className="chat-preview">
-          This is a somewhat longer chat preview for testing purposes
-        </div>
+        <div className="chat-preview">{lastMessage && lastMessage.text}</div>
       </div>
     </div>
   );

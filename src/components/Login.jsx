@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginUser, registerUser } from "../redux/actions/index.js";
 
 function Login() {
@@ -9,6 +10,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const path = window.location.pathname;
+  const navigate = useNavigate();
 
   const user =
     path === "/"
@@ -24,10 +26,12 @@ function Login() {
   const handleSubmitLogin = (event) => {
     event.preventDefault();
     dispatch(loginUser(user));
+    navigate("/");
   };
   const handleRegisterLogin = (event) => {
     event.preventDefault();
     dispatch(registerUser(user));
+    navigate("/");
   };
   return (
     <div className="login-page">
