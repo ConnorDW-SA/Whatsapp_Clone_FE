@@ -1,6 +1,7 @@
 export const ADD_MY_CHATS = "ADD_MY_CHATS";
 export const USER_LOGIN = "USER_LOGIN";
 export const SET_CURRENT_CHAT = "SET_CURRENT_CHAT";
+export const SET_MY_PROFILE = "SET_MY_PROFILE";
 
 export const loginUser = (user) => {
   return async (dispatch) => {
