@@ -96,6 +96,10 @@
   white-space: normal;
   font-size: 0.9rem;
 }
+
+.bg-message-whatsapp {
+  background-color: #d9fdd3;
+}
 /* Main -------------------------------------------------- */
 
 /* Footer -------------------------------------------------- */
