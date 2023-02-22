@@ -1,9 +1,30 @@
 import React, { useState } from "react";
-
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/actions/index.js";
 
 function Login() {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const path = window.location.pathname;
+
+  const user =
+    path === "/auth/login"
+      ? {
+          email: email.toLowerCase(),
+          password: password,
+        }
+      : {
+          username: username,
+          email: email.toLowerCase(),
+          password: password,
+        };
+  const handleSubmitLogin = (event) => {
+    event.preventDefault();
+    dispatch(loginUser(user));
+  };
   return (
     <div className="login-page">
       <div className="login">
@@ -26,14 +47,27 @@ function Login() {
 
             <form>
               <div className="login__inputContainer">
-                <input placeholder="Email" type="email" />
+                <input
+                  placeholder="Email"
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
 
               <div className="login__inputContainer">
-                <input placeholder="Password" type="password" />
+                <input
+                  placeholder="Password"
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
 
-              <button className="login__loginButton ">Sign In</button>
+              <button
+                className="login__loginButton "
+                onClick={handleSubmitLogin}
+              >
+                Sign In
+              </button>
               <div className="login__separator">or</div>
 
               <div className="login__googleLogin">
