@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import SideView from "./SideView";
-import MainView from "./MainView";
 import { useDispatch } from "react-redux";
 import { ADD_MY_CHATS } from "../redux/actions";
 import MainView from "./SingleChat/MainView/MainView";
