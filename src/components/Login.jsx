@@ -11,7 +11,7 @@ function Login() {
   const path = window.location.pathname;
 
   const user =
-    path === "/auth/login"
+    path === "/"
       ? {
           email: email.toLowerCase(),
           password: password,
