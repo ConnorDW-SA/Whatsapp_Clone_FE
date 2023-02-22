@@ -3,6 +3,7 @@ import SideView from "./SideView";
 import MainView from "./MainView";
 import { useDispatch } from "react-redux";
 import { ADD_MY_CHATS } from "../redux/actions";
+import MainView from "./SingleChat/MainView/MainView";
 
 function Home() {
   const dispatch = useDispatch();
