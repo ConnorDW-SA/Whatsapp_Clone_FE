@@ -95,10 +95,22 @@
   word-break: break-word;
   white-space: normal;
   font-size: 0.9rem;
+  position: relative;
+}
+
+.timestamp-messages {
+  position: absolute;
+  bottom: 0.2rem;
+  right: 0.4rem;
+  font-size: 0.8em;
+  color: gray;
 }
 
 .bg-message-whatsapp {
   background-color: #d9fdd3;
+}
+
+.person-one-messages {
 }
 /* Main -------------------------------------------------- */
 
