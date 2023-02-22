@@ -1,13 +1,14 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import localStorage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import mainReducer from "../reducers";
 
 const persistConfig = {
   key: "root",
   storage: localStorage,
 };
 
-const bigReducer = combineReducers({});
+const bigReducer = combineReducers({ home: mainReducer });
 
 const persistedReducer = persistReducer(persistConfig, bigReducer);
 
