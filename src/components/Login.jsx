@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/actions/index.js";
+import { loginUser, registerUser } from "../redux/actions/index.js";
 
 function Login() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ function Login() {
   const path = window.location.pathname;
 
   const user =
-    path === "/auth/login"
+    path === "/"
       ? {
           email: email.toLowerCase(),
           password: password,
@@ -24,6 +24,10 @@ function Login() {
   const handleSubmitLogin = (event) => {
     event.preventDefault();
     dispatch(loginUser(user));
+  };
+  const handleRegisterLogin = (event) => {
+    event.preventDefault();
+    dispatch(registerUser(user));
   };
   return (
     <div className="login-page">
@@ -41,7 +45,7 @@ function Login() {
               </div>
 
               <div>
-                <h2>SIGN UP</h2>
+                <h2 onClick={handleRegisterLogin}>SIGN UP</h2>
               </div>
             </div>
 
@@ -61,7 +65,13 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-
+              <div className="login__inputContainer">
+                <input
+                  placeholder="Username"
+                  type="text"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
               <button
                 className="login__loginButton "
                 onClick={handleSubmitLogin}

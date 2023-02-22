@@ -52,3 +52,30 @@ export const getallUser = () => {
     }
   };
 };
+
+export const registerUser = (user) => {
+  return async (dispatch) => {
+    const option = {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      let response = await fetch(
+        `http://localhost:3001/users/register`,
+        option
+      );
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: USER_LOGIN,
+          payload: user,
+        });
+        dispatch(getallUser(data.accessToken));
+        console.log(data);
+      }
+    } catch (error) {}
+  };
+};
