@@ -1,4 +1,4 @@
-import { ADD_MY_CHATS } from "../actions";
+import { ADD_MY_CHATS, USER_LOGIN } from "../actions";
 
 const initialState = {
   userInfo: {
@@ -19,6 +19,12 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         chats: action.payload,
+      };
+    }
+    case USER_LOGIN: {
+      return {
+        ...state,
+        userInfo: action.payload,
       };
     }
     default:
