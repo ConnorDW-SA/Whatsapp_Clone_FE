@@ -20,9 +20,6 @@ function SideHeader() {
   ];
 
   const [optionsClicked, setOptionsClicked] = useState(false);
-  const [groupClicked, setGroupClicked] = useState(false);
-  const [circleClicked, setCircleClicked] = useState(false);
-  const [chatClicked, setChatClicked] = useState(false);
 
   const myProfile = useSelector((state) => state.home.myProfile);
 
@@ -46,30 +43,15 @@ function SideHeader() {
       </div>
 
       <div className="d-flex align-items-center">
-        <div
-          onClick={() => {
-            setGroupClicked(!groupClicked);
-          }}
-          className={groupClicked ? "header-icon-clicked" : "header-icon"}
-        >
+        <div className="header-icon">
           <Group />
         </div>
 
-        <div
-          onClick={() => {
-            setCircleClicked(!circleClicked);
-          }}
-          className={circleClicked ? "header-icon-clicked" : "header-icon"}
-        >
+        <div className="header-icon">
           <Circle />
         </div>
 
-        <div
-          onClick={() => {
-            setChatClicked(!chatClicked);
-          }}
-          className={chatClicked ? "header-icon-clicked" : "header-icon"}
-        >
+        <div className="header-icon">
           <Chat />
         </div>
 

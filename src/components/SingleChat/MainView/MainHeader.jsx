@@ -5,7 +5,6 @@ import Dropdown from "../../Dropdown";
 
 function ChatHeader() {
   const [optionsClicked, setOptionsClicked] = useState(false);
-  const [searchClicked, setSearchClicked] = useState(false);
 
   const textContent = [
     "Contact Info",
@@ -41,12 +40,8 @@ function ChatHeader() {
         </div>
       </div>
       <div className="d-flex pr-4">
-        <div className={searchClicked ? "header-icon-clicked" : "header-icon"}>
-          <SearchIcon
-            onClick={() => {
-              setSearchClicked(!searchClicked);
-            }}
-          />
+        <div className="header-icon">
+          <SearchIcon />
         </div>
         <div className={optionsClicked ? "header-icon-clicked" : "header-icon"}>
           <DotIcon
