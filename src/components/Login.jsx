@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
+import { FcGoogle, FcAdvance } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { loginUser, registerUser } from "../redux/actions/index.js";
+import Logo from "./icons/whatsapp-logo-outline.png";
 
 function Login() {
   const dispatch = useDispatch();
@@ -14,12 +15,12 @@ function Login() {
     path === "/"
       ? {
           email: email.toLowerCase(),
-          password: password,
+          password: password
         }
       : {
           username: username,
           email: email.toLowerCase(),
-          password: password,
+          password: password
         };
   const handleSubmitLogin = (event) => {
     event.preventDefault();
@@ -30,72 +31,49 @@ function Login() {
     dispatch(registerUser(user));
   };
   return (
-    <div className="login-page">
-      <div className="login">
-        <div className="login__left">
-          <div className="login__leftHeader">
-            <img src="whatapp.svg" />
-            <h2>WhatsApp</h2>
-          </div>
-
-          <div className="login__leftContainer">
-            <div className="login__signToggle">
-              <div>
-                <h2>LOGIN</h2>
-              </div>
-
-              <div>
-                <h2 onClick={handleRegisterLogin}>SIGN UP</h2>
-              </div>
-            </div>
-
-            <form>
-              <div className="login__inputContainer">
-                <input
-                  placeholder="Email"
-                  type="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-
-              <div className="login__inputContainer">
-                <input
-                  placeholder="Password"
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="login__inputContainer">
-                <input
-                  placeholder="Username"
-                  type="text"
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <button
-                className="login__loginButton "
-                onClick={handleSubmitLogin}
-              >
-                Sign In
-              </button>
-              <div className="login__separator">or</div>
-
-              <div className="login__googleLogin">
-                <span>
-                  <FcGoogle className="google-icon" />
-                </span>
-
-                <button>Login with google</button>
-              </div>
-            </form>
-          </div>
+    <div className="login-container">
+      <div className="login-form w-50 d-flex bg-white justify-content-center align-items-center ">
+        <div className="login-image">
+          <img src={Logo} alt="logo" className="logo-login"></img>
         </div>
-
-        <div className="login__right">
-          <img
-            className="login__rightImage"
-            src="https://techloverhd.com/wp-content/uploads/2016/04/How-to-use-WhatsApp-Web-and-keep-your-phone-connected.jpg"
+        <div className="d-flex flex-column login-text">
+          <h1 className="text-center mb-5">Login</h1>
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+            className="login-field rounded-pill"
           />
+
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            className="login-field  rounded-pill"
+          />
+
+          <button
+            onClick={handleSubmitLogin}
+            className="login-button rounded-pill mt-3 py-2 text-white"
+          >
+            Login
+          </button>
+          <button className="no-style-button">
+            <div className="login-google d-flex mt-5 pl-4">
+              <span className="mr-3 google-icon-login">
+                <FcGoogle />
+              </span>
+              <p>Continue with Google</p>
+            </div>
+          </button>
+          <button className="no-style-button">
+            <div className="d-flex mt-3 pl-4">
+              <span className="mr-3 google-icon-login">
+                <FcAdvance />
+              </span>
+              <p className="">Create an account</p>
+            </div>
+          </button>
         </div>
       </div>
     </div>

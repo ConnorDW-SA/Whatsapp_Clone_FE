@@ -14,8 +14,8 @@ function ChatCard(props) {
       const response = await fetch(`http://localhost:3001/chats/${chat._id}`, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y1ZjA3NWIzYmFiODJmZDI3Y2I2NDMiLCJpYXQiOjE2NzcwODEwODQsImV4cCI6MTY3NzY4NTg4NH0.aOuypBL6P6QhzcDirkOGDoI_0GBPX0ujrksjcWEuAAE",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y2NWRhMGQ1ZDM1Y2Q4NmIwYmY2YTgiLCJpYXQiOjE2NzcwOTI1NDAsImV4cCI6MTY3NzY5NzM0MH0.AEkYXYuD6a3jmm6x4N-lJ8l9D1cmOa4htD_kZczFhyg"
+        }
       });
       if (response) {
         const data = await response.json();
