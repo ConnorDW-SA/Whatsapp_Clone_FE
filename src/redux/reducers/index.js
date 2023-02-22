@@ -1,4 +1,4 @@
-import { ADD_MY_CHATS, USER_LOGIN } from "../actions";
+import { ADD_MY_CHATS, SET_CURRENT_CHAT, USER_LOGIN } from "../actions";
 
 const initialState = {
   userInfo: {
@@ -8,17 +8,27 @@ const initialState = {
     avatar: "",
   },
   chats: {
-    active: "",
+    active: {},
     list: [],
   },
 };
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_CURRENT_CHAT: {
+      return {
+        ...state,
+        chats: { ...state.chats, active: action.payload },
+      };
+    }
+
     case ADD_MY_CHATS: {
       return {
         ...state,
-        chats: action.payload,
+        chats: {
+          ...state.chats,
+          list: action.payload,
+        },
       };
     }
     case USER_LOGIN: {

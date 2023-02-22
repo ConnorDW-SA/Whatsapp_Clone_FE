@@ -167,13 +167,28 @@
   height: calc(100% - 108px);
   width: 100%;
   overflow: auto;
-  padding-inline: 1rem;
-  padding-block: 0.625rem;
 }
 
 .chat-card {
   width: 100%;
   height: 72px;
+  cursor: pointer;
+  padding-inline: 1rem;
+  padding-top: 0.625rem;
+  background-color: white;
+}
+
+.chat-card:hover {
+  background-color: #f5f6f6;
+}
+
+.chat-card-active {
+  width: 100%;
+  height: 72px;
+  cursor: pointer;
+  padding-inline: 1rem;
+  padding-top: 0.625rem;
+  background-color: #f0f2f5;
 }
 
 .chats-profile {
@@ -191,6 +206,10 @@
   text-overflow: ellipsis;
   width: 235px;
   font-size: 0.8rem;
+}
+
+.chat-prev-border {
+  border-bottom: 1px solid #f0f2f5;
 }
 
 .chat-date {

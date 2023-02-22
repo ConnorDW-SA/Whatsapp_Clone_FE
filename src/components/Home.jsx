@@ -13,7 +13,7 @@ function Home() {
       const response = await fetch("http://localhost:3001/chats", {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y1ZjA3NWIzYmFiODJmZDI3Y2I2NDMiLCJpYXQiOjE2NzcwNjIyODMsImV4cCI6MTY3NzY2NzA4M30.Tiph3OxAimLmHZtR3jonZeSVzS6Vh4IrCwyIK1TjZro",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y1ZjA3NWIzYmFiODJmZDI3Y2I2NDMiLCJpYXQiOjE2NzcwODEwODQsImV4cCI6MTY3NzY4NTg4NH0.aOuypBL6P6QhzcDirkOGDoI_0GBPX0ujrksjcWEuAAE",
         },
       });
       if (response) {
