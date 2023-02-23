@@ -10,20 +10,20 @@ function Login() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  // const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const path = window.location.pathname;
-
+  console.log(username);
   const user =
-    path === "/"
+    path === "/login"
       ? {
           email: email.toLowerCase(),
           password: password,
         }
       : {
-          username: username,
           email: email.toLowerCase(),
           password: password,
+          username: username,
         };
   const handleSubmitLogin = (event) => {
     event.preventDefault();
@@ -40,7 +40,7 @@ function Login() {
           <img src={Logo} alt="logo" className="logo-login"></img>
         </div>
         <div className="d-flex flex-column login-text">
-          <h1 className="text-center mb-5">Login</h1>
+          <h1 className="text-center mb-3">Login</h1>
           <input
             type="email"
             placeholder="Email"
@@ -52,6 +52,7 @@ function Login() {
           <input
             type="password"
             placeholder="Password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="login-field  rounded-pill"
           />
@@ -68,7 +69,6 @@ function Login() {
               <input
                 type="file"
                 placeholder="Avatar"
-                onChange={(e) => setPassword(e.target.value)}
                 className="login-field  rounded-pill"
               />
             </div>
@@ -80,21 +80,30 @@ function Login() {
           >
             Login
           </button>
-          <button className="no-style-button rounded-pill mt-2 py-2 text-white">
+          {show && (
+            <button
+              onClick={handleRegisterLogin}
+              className="login-button rounded-pill mt-3 py-2 text-white"
+            >
+              Register
+            </button>
+          )}
+          <button className="no-style-button rounded-pill mt-3  text-white">
             {/* <div className="login-google d-flex mt-5 pl-4"> */}
-            <span className="mr-1 google-icon-login">
-              <FcGoogle />
+            <span className=" google-icon-login">
+              <FcGoogle className="mr-2" />
             </span>
             <p>Continue with Google</p>
             {/* </div> */}
           </button>
-          <button>
-            <div className=" mt-1 pl-4">
-              <span className="">
-                <FcAdvance />
-              </span>
-              <p className="">Create an account</p>
-            </div>
+          <button
+            className="no-style-button rounded-pill mt-3 py-1 text-white"
+            onClick={handleShow}
+          >
+            <span className=" google-icon-login">
+              <FcAdvance className="mr-3" />
+            </span>
+            <p className="">Create an account</p>
           </button>
         </div>
       </div>
