@@ -11,8 +11,6 @@ const initialState = {
     name: "",
     email: "",
     avatar: "",
-    about: "",
-    username: "",
   },
   chats: {
     active: {},

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { FcGoogle, FcAdvance } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser, registerUser } from "../redux/actions/index.js";
+import { loginUser } from "../redux/actions/index.js";
 import Logo from "./icons/whatsapp-logo-outline.png";
+import { USER_LOGIN } from "../redux/actions/index.js";
 
 function Login() {
   const dispatch = useDispatch();
@@ -11,31 +12,36 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
+  const user = {
+    email: email,
+    password: password,
+  };
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
-    dispatch(loginUser({ email: email.toLowerCase(), password: password }));
-    // try {
-    //   const response = await fetch("http://localhost:3001/users/login", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email,
-    //       password,
-    //     }),
-    //   });
+    try {
+      // Send a POST request to your authentication API
+      const response = await fetch("http://localhost:3001/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-    //   if (response.ok) {
-    //     navigate("/");
-    //   } else {
-    //     const data = await response.json();
-    //     console.log("Please check email and pass correctly", data);
-    //   }
-    // } catch (error) {
-    //   alert(error.message);
-    // }
+      if (response.ok) {
+        dispatch(loginUser(user));
+
+        navigate("/");
+      } else {
+        const data = await response.json();
+        alert(data.message);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (

@@ -33,10 +33,10 @@ export const loginUser = (user) => {
 
 export const getallUser = () => {
   return async (dispatch) => {
+    console.log("this is localstorage", localStorage);
     const optionUser = {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     };

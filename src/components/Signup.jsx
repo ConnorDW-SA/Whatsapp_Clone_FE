@@ -13,35 +13,34 @@ function Signup() {
 
   const handleRegisterLogin = async (event) => {
     event.preventDefault();
-    // try {
-    //   const response = await fetch("http://localhost:3001/users/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email,
-    //       password,
-    //       username,
-    //     }),
-    //   });
+    try {
+      const response = await fetch("http://localhost:3001/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          username,
+        }),
+      });
 
-    //   if (response.ok) {
-    //     navigate("/login");
-    //   } else {
-    //     const data = await response.json();
-    //     console.log("Please fill all required field");
-    //   }
-    // } catch (error) {
-    //   alert(error.message);
-    // }
-    dispatch(
-      registerUser({
-        email: email.toLowerCase(),
-        password: password,
-        username: username,
-      })
-    );
+      if (response.ok) {
+        dispatch(
+          registerUser({
+            email: email.toLowerCase(),
+            password: password,
+            username: username,
+          })
+        );
+        navigate("/login");
+      } else {
+        console.log("Please fill all required field");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
   return (
     <div className="login-container">
