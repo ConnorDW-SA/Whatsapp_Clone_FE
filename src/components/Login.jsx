@@ -1,103 +1,144 @@
 import React, { useState } from "react";
 import { FcGoogle, FcAdvance } from "react-icons/fc";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { login, register } from "../redux/actions";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../redux/actions/index.js";
 import Logo from "./icons/whatsapp-logo-outline.png";
-import { USER_LOGIN } from "../redux/actions/index.js";
 
-function Login() {
+function Login({ login }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
 
-  const navigate = useNavigate();
-  const user = {
-    email: email,
-    password: password,
-  };
-  const handleSubmitLogin = async (event) => {
-    event.preventDefault();
-    try {
-      // Send a POST request to your authentication API
-      const response = await fetch("http://localhost:3001/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+  function handleShowRegistrationForm() {
+    setShowRegistrationForm(true);
+  }
 
-      if (response.ok) {
-        dispatch(loginUser(user));
-
-        navigate("/");
-      } else {
-        const data = await response.json();
-        alert(data.message);
-      }
-    } catch (error) {
-      alert(error.message);
-    }
+  const handleRegistration = () => {
+    dispatch(register(username, email, password, avatar));
   };
 
-  return (
-    <div className="login-container">
-      <div className="login-form w-50 d-flex bg-white justify-content-center align-items-center ">
-        <div className="login-image">
-          <img src={Logo} alt="logo" className="logo-login"></img>
-        </div>
-        <div className="d-flex flex-column login-text">
-          <h1 className="text-center mb-3">Login</h1>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="login-field rounded-pill"
-          />
+  const handleLogin = () => {
+    dispatch(login(email, password));
+  };
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="login-field  rounded-pill"
-          />
+  const handleBack = () => {
+    setShowRegistrationForm(false);
+  };
 
-          <button
-            onClick={handleSubmitLogin}
-            className="login-button rounded-pill mt-3 py-2 text-white"
-          >
-            Login
-          </button>
-          <Link
-            to={
-              "https://accounts.google.com/v3/signin/identifier?dsh=S-183850306%3A1677165200727690&authuser=0&continue=https%3A%2F%2Fmail.google.com&ec=GAlAFw&hl=en&service=mail&flowName=GlifWebSignIn&flowEntry=AddSession"
-            }
-          >
-            <button className="creat-account-btn mt-2 ">
-              <span className=" creat-account-icon mb-2">
-                <FcGoogle className="mr-3" />
-              </span>
-              <p>Continue with Google</p>
+  if (showRegistrationForm) {
+    return (
+      <div className="login-container">
+        <div className="login-form w-50 d-flex bg-white justify-content-center align-items-center ">
+          <div className="login-image">
+            <img src={Logo} alt="logo" className="logo-login"></img>
+          </div>
+          <div className="d-flex flex-column login-text">
+            <h1 className="text-center mb-3">Register</h1>
+
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="login-field rounded-pill"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="login-field rounded-pill"
+            />
+            <input
+              type="text"
+              placeholder="Avatar URL"
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+              className="login-field rounded-pill"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="login-field rounded-pill"
+            />
+            <button
+              onClick={handleRegistration}
+              className="login-button rounded-pill mt-3 py-2 text-white"
+            >
+              Register
             </button>
-          </Link>
-          <Link to={"/register"}>
-            <button className="creat-account-btn mt-2">
-              <span className=" creat-account-icon mb-2">
-                <FcAdvance className="mr-3" />
-              </span>
-              <p className="mb-2">Create an account</p>
+            <button
+              onClick={handleBack}
+              className="login-button rounded-pill mt-3 py-2 text-white"
+            >
+              Back
             </button>
-          </Link>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="login-container">
+        <div className="login-form w-50 d-flex bg-white justify-content-center align-items-center ">
+          <div className="login-image">
+            <img src={Logo} alt="logo" className="logo-login"></img>
+          </div>
+          <div className="d-flex flex-column login-text">
+            <h1 className="text-center mb-3">Login</h1>
+
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="login-field rounded-pill"
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="login-field  rounded-pill"
+            />
+            <button
+              onClick={handleLogin}
+              className="login-button rounded-pill mt-3 py-2 text-white"
+            >
+              Login
+            </button>
+            <Link className="link-no-style mt-4 ml-5 pl-5" to={"/"}>
+              <button className="no-style-button mt-2 d-flex">
+                <span className=" creat-account-icon mb-2">
+                  <FcGoogle className="mr-3" />
+                </span>
+                <p>Continue with Google</p>
+              </button>
+            </Link>
+            <Link className="link-no-style mt-1 ml-5 pl-5" to={"/register"}>
+              <button
+                onClick={handleShowRegistrationForm}
+                className=" mt-2 no-style-button d-flex"
+              >
+                <span className=" creat-account-icon mb-2">
+                  <FcAdvance className="mr-3" />
+                </span>
+                <p className="mb-2">Create an account</p>
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default Login;
+export default connect(null, { login })(Login);

@@ -3,7 +3,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import Signup from "./components/Signup";
 
 function App() {
   return (
@@ -12,7 +11,7 @@ function App() {
         <div className="window">
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Signup />} />
+
             <Route path="/" element={<Home />} />
           </Routes>
         </div>
