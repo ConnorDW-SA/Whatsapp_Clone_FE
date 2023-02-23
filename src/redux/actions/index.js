@@ -1,6 +1,9 @@
 export const ADD_MY_CHATS = "ADD_MY_CHATS";
 export const SET_CURRENT_CHAT = "SET_CURRENT_CHAT";
 export const SET_MY_PROFILE = "SET_MY_PROFILE";
+export const SET_ONLINE_USERS = "SET_ONLINE_USERS";
+export const SET_CHATS_HISTORY = "SET_CHATS_HISTORY";
+export const SET_CHAT_HISTORY = "SET_CHAT_HISTORY";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 
