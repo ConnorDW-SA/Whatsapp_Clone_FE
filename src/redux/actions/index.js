@@ -1,56 +1,27 @@
 export const ADD_MY_CHATS = "ADD_MY_CHATS";
-export const USER_LOGIN = "USER_LOGIN";
 export const SET_CURRENT_CHAT = "SET_CURRENT_CHAT";
 export const SET_MY_PROFILE = "SET_MY_PROFILE";
 export const SET_ONLINE_USERS = "SET_ONLINE_USERS";
 export const SET_CHATS_HISTORY = "SET_CHATS_HISTORY";
 export const SET_CHAT_HISTORY = "SET_CHAT_HISTORY";
 
-export const loginUser = (user) => {
-  return async (dispatch) => {
-    const option = {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    try {
-      let response = await fetch(`http://localhost:3001/users/login`, option);
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        if (data.accessToken) {
-          localStorage.setItem("accessToken", data.accessToken);
-          dispatch({
-            type: USER_LOGIN,
-            payload: user,
-          });
-          dispatch(getallUser(data.accessToken));
-        }
-      }
-    } catch (error) {}
-  };
-};
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
 
-export const getallUser = () => {
+export const getCurrentUser = () => {
   return async (dispatch) => {
-    const optionUser = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    };
     try {
-      let response = await fetch(`http://localhost:3001/users/me`, optionUser);
+      const response = await fetch("http://localhost:3001/users/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }
+      });
+      const data = await response.json();
+      console.log(data);
       if (response.ok) {
-        const data = await response.json();
-        console.log("User Details", data);
-        dispatch({
-          type: USER_LOGIN,
-          payload: data,
-        });
+        dispatch({ type: LOGIN_REQUEST, payload: data.user });
+      } else {
+        throw new Error(data.message);
       }
     } catch (error) {
       console.log(error);
@@ -58,29 +29,50 @@ export const getallUser = () => {
   };
 };
 
-export const registerUser = (user) => {
+export const login = (email, password) => {
   return async (dispatch) => {
-    const option = {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
     try {
-      let response = await fetch(
-        `http://localhost:3001/users/register`,
-        option
-      );
+      const response = await fetch("http://localhost:3001/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
+      console.log(data);
       if (response.ok) {
-        const data = await response.json();
-        dispatch({
-          type: USER_LOGIN,
-          payload: user,
-        });
-        dispatch(getallUser(data.accessToken));
-        console.log(data);
+        localStorage.setItem("accessToken", data.accessToken);
+        dispatch({ type: LOGIN_REQUEST, payload: data.user });
+      } else {
+        throw new Error(data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const register = (email, password, username, avatar) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch("http://localhost:3001/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password, username, avatar })
+      });
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        localStorage.setItem("accessToken", data.accessToken);
+        dispatch({ type: LOGIN_REQUEST, payload: data.user });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

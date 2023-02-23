@@ -19,8 +19,8 @@ function ChatCard(props) {
     try {
       const response = await fetch(`http://localhost:3001/chats/${chat._id}`, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
       if (response) {
         const data = await response.json();
