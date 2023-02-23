@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 function ChatCard(props) {
   const chat = props.chat;
   const lastMessage = chat.messages[chat.messages.length - 1];
-  console.log(lastMessage);
   const currentUser = useSelector((state) => state.home.userInfo);
   const accessToken = localStorage.getItem("accessToken");
   const targetUser = chat.users.find(
@@ -37,7 +36,7 @@ function ChatCard(props) {
     <div
       onClick={async () => await handleChatClick(chat)}
       className={
-        activeChat._id === chat._id
+        activeChat && activeChat._id === chat._id
           ? "chat-card-active d-flex"
           : "chat-card d-flex"
       }
