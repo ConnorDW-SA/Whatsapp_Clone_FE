@@ -18,7 +18,6 @@ function Home() {
       });
       if (response) {
         const data = await response.json();
-        console.log(data);
         dispatch({
           type: ADD_MY_CHATS,
           payload: data,
