@@ -342,13 +342,28 @@
 }
 
 .google-icon-login {
-  transform: translateY(-2px);
+  /* position: absolute;
+  right: 0;
+  left: 700px;
+  top: 100px; */
+
+  /* transform: translateY(-2px); */
 }
+/* .google-btn {
+  display: flex;
+  position: relative;
+  align-items: center;
+} */
 
 .no-style-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
+  position: relative;
+  background-color: #57b846;
+  transition: background-color 0.6s ease;
+  height: 32px;
 }
 
 .create-account-text {
