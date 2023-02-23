@@ -9,18 +9,21 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const path = window.location.pathname;
-
+  console.log(username);
   const user =
-    path === "/"
+    path === "/login"
       ? {
           email: email.toLowerCase(),
-          password: password
+          password: password,
         }
       : {
-          username: username,
           email: email.toLowerCase(),
-          password: password
+          password: password,
+          username: username,
         };
   const handleSubmitLogin = (event) => {
     event.preventDefault();
@@ -37,20 +40,39 @@ function Login() {
           <img src={Logo} alt="logo" className="logo-login"></img>
         </div>
         <div className="d-flex flex-column login-text">
-          <h1 className="text-center mb-5">Login</h1>
+          <h1 className="text-center mb-3">Login</h1>
           <input
-            type="text"
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="login-field rounded-pill"
           />
 
           <input
             type="password"
             placeholder="Password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="login-field  rounded-pill"
           />
+
+          {show && (
+            <div>
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="login-field  rounded-pill"
+              />
+              <input
+                type="file"
+                placeholder="Avatar"
+                className="login-field  rounded-pill"
+              />
+            </div>
+          )}
 
           <button
             onClick={handleSubmitLogin}
@@ -58,21 +80,30 @@ function Login() {
           >
             Login
           </button>
-          <button className="no-style-button">
-            <div className="login-google d-flex mt-5 pl-4">
-              <span className="mr-3 google-icon-login">
-                <FcGoogle />
-              </span>
-              <p>Continue with Google</p>
-            </div>
+          {show && (
+            <button
+              onClick={handleRegisterLogin}
+              className="login-button rounded-pill mt-3 py-2 text-white"
+            >
+              Register
+            </button>
+          )}
+          <button className="no-style-button rounded-pill mt-3  text-white">
+            {/* <div className="login-google d-flex mt-5 pl-4"> */}
+            <span className=" google-icon-login">
+              <FcGoogle className="mr-2" />
+            </span>
+            <p>Continue with Google</p>
+            {/* </div> */}
           </button>
-          <button className="no-style-button">
-            <div className="d-flex mt-3 pl-4">
-              <span className="mr-3 google-icon-login">
-                <FcAdvance />
-              </span>
-              <p className="">Create an account</p>
-            </div>
+          <button
+            className="no-style-button rounded-pill mt-3 py-1 text-white"
+            onClick={handleShow}
+          >
+            <span className=" google-icon-login">
+              <FcAdvance className="mr-3" />
+            </span>
+            <p className="">Create an account</p>
           </button>
         </div>
       </div>
