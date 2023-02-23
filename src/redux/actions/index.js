@@ -16,6 +16,7 @@ export const loginUser = (user) => {
       let response = await fetch(`http://localhost:3001/users/login`, option);
       if (response.ok) {
         const data = await response.json();
+
         console.log(data);
         if (data.accessToken) {
           localStorage.setItem("accessToken", data.accessToken);
@@ -32,10 +33,10 @@ export const loginUser = (user) => {
 
 export const getallUser = () => {
   return async (dispatch) => {
+    console.log("this is localstorage", localStorage);
     const optionUser = {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     };
