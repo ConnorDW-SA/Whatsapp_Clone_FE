@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MessagePersonOne from "../Chats/PersonOne.json";
 import MessagePersonTwo from "../Chats/PersonTwo.json";
+import { io } from "socket.io-client";
+import { SET_CHATS_HISTORY, SET_CHAT_HISTORY } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 function formatTime(timeString) {
   const date = new Date(timeString);
@@ -9,12 +12,35 @@ function formatTime(timeString) {
   return `${hour}:${minute}`;
 }
 
+const socket = io("http://localhost:3001", { transports: ["websocket"] });
+
 function MessagesList() {
   let currentSender = "";
 
   const messages = [...MessagePersonOne, ...MessagePersonTwo].sort((a, b) =>
     a.createdAt.localeCompare(b.createdAt)
   );
+  const dispatch = useDispatch();
+  const currentChat = useSelector((state) => state.home.chats.active);
+
+  useEffect(() => {
+    socket.on("welcome", (welcomeMessage) => {
+      console.log(welcomeMessage);
+
+      socket.on("newMessage", (newMessage) => {
+        console.log(newMessage);
+        const payload = [currentChat._id, newMessage.message];
+        dispatch({
+          type: SET_CHATS_HISTORY,
+          payload: payload,
+        });
+        dispatch({
+          type: SET_CHAT_HISTORY,
+          payload: payload,
+        });
+      });
+    });
+  });
 
   return (
     <div className="d-flex flex-column convo-div">

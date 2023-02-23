@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ChatCard(props) {
   const chat = props.chat;
-  const lastMessage = chat.messages[chat.messages.length - 1];
+  const lastMessage = chat.messages && chat.messages[chat.messages.length - 1];
   const currentUser = useSelector((state) => state.home.userInfo);
   const accessToken = localStorage.getItem("accessToken");
-  const targetUser = chat.users.find(
-    (user) => user.username !== currentUser.username
-  );
+  const targetUser =
+    chat.length !== 0 &&
+    chat.users.find((user) => user.username !== currentUser.username);
   const activeChat = useSelector((state) => state.home.chats.active);
 
   const dispatch = useDispatch();
@@ -46,7 +46,9 @@ function ChatCard(props) {
       </div>
       <div className="chat-prev-border flex-grow-1 pl-3">
         <div className="d-flex justify-content-between align-items-center">
-          <div className="profile-name">{targetUser.username}</div>
+          <div className="profile-name">
+            {targetUser && targetUser.username}
+          </div>
           <div className="chat-date">
             {lastMessage && lastMessage.createdAt}
           </div>

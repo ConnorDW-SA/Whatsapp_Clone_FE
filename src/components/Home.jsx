@@ -33,6 +33,7 @@ function Home() {
   useEffect(() => {
     fetchMyChats();
   }, []);
+
   return (
     <div className="home d-flex">
       <SideView />
