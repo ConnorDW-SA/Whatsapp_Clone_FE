@@ -4,10 +4,30 @@ export const SET_MY_PROFILE = "SET_MY_PROFILE";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 
+export const getCurrentUser = () => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch("http://localhost:3001/users/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }
+      });
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        dispatch({ type: LOGIN_REQUEST, payload: data.user });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const login = (email, password) => {
   return async (dispatch) => {
-    dispatch({ type: LOGIN_REQUEST });
-
     try {
       const response = await fetch("http://localhost:3001/users/login", {
         method: "POST",
@@ -32,8 +52,6 @@ export const login = (email, password) => {
 
 export const register = (email, password, username, avatar) => {
   return async (dispatch) => {
-    dispatch({ type: LOGIN_REQUEST });
-
     try {
       const response = await fetch("http://localhost:3001/users/register", {
         method: "POST",

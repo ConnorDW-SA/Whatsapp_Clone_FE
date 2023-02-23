@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { FcGoogle, FcAdvance } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { login, register } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import Logo from "./icons/whatsapp-logo-outline.png";
 
 function Login({ login }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,11 +21,13 @@ function Login({ login }) {
   }
 
   const handleRegistration = () => {
-    dispatch(register(username, email, password, avatar));
+    dispatch(register(username, email, password, avatar)).then(() =>
+      navigate("/")
+    );
   };
 
   const handleLogin = () => {
-    dispatch(login(email, password));
+    dispatch(login(email, password)).then(() => navigate("/"));
   };
 
   const handleBack = () => {
@@ -115,7 +119,7 @@ function Login({ login }) {
             >
               Login
             </button>
-            <Link className="link-no-style mt-4 ml-5 pl-5" to={"/"}>
+            <Link className="link-no-style mt-4 ml-5 pl-5">
               <button className="no-style-button mt-2 d-flex">
                 <span className=" creat-account-icon mb-2">
                   <FcGoogle className="mr-3" />
@@ -123,12 +127,12 @@ function Login({ login }) {
                 <p>Continue with Google</p>
               </button>
             </Link>
-            <Link className="link-no-style mt-1 ml-5 pl-5" to={"/register"}>
+            <Link className="link-no-style mt-1 ml-5 pl-5">
               <button
                 onClick={handleShowRegistrationForm}
                 className=" mt-2 no-style-button d-flex"
               >
-                <span className=" creat-account-icon mb-2">
+                <span className=" creat-account-icon mb-2 ml-2">
                   <FcAdvance className="mr-3" />
                 </span>
                 <p className="mb-2">Create an account</p>
