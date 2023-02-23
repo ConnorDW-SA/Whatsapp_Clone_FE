@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FcGoogle, FcAdvance } from "react-icons/fc";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginUser, registerUser } from "../redux/actions/index.js";
 import Logo from "./icons/whatsapp-logo-outline.png";
 
@@ -12,21 +13,41 @@ function Login() {
   const [show, setShow] = useState(false);
   // const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const path = window.location.pathname;
-  console.log(username);
+  const navigate = useNavigate();
 
-  const handleSubmitLogin = (event) => {
+  const handleSubmitLogin = async (event) => {
     event.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3001/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        navigate("/");
+      } else {
+        const data = await response.json();
+        alert(data.message);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
     dispatch(loginUser({ email: email.toLowerCase(), password: password }));
   };
 
   const handleRegisterLogin = (event) => {
-    event.preventDefault({ email: email.toLowerCase(), password: password });
+    event.preventDefault();
     dispatch(
       registerUser({
         email: email.toLowerCase(),
         password: password,
-        username: username
+        username: username,
       })
     );
   };
