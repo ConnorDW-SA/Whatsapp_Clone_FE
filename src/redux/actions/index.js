@@ -1,7 +1,9 @@
 export const ADD_MY_CHATS = "ADD_MY_CHATS";
 export const SET_CURRENT_CHAT = "SET_CURRENT_CHAT";
 export const SET_MY_PROFILE = "SET_MY_PROFILE";
-
+export const SET_ONLINE_USERS = "SET_ONLINE_USERS";
+export const SET_CHATS_HISTORY = "SET_CHATS_HISTORY";
+export const SET_CHAT_HISTORY = "SET_CHAT_HISTORY";
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 
 export const getCurrentUser = () => {
@@ -10,8 +12,8 @@ export const getCurrentUser = () => {
       const response = await fetch("http://localhost:3001/users/me", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-        }
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       });
       const data = await response.json();
       console.log(data);
@@ -32,9 +34,9 @@ export const login = (email, password) => {
       const response = await fetch("http://localhost:3001/users/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
       console.log(data);
@@ -56,9 +58,9 @@ export const register = (email, password, username, avatar) => {
       const response = await fetch("http://localhost:3001/users/register", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password, username, avatar })
+        body: JSON.stringify({ email, password, username, avatar }),
       });
       const data = await response.json();
       console.log(data);
