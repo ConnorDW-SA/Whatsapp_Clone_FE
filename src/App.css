@@ -349,7 +349,25 @@
 
   transform: translateY(-2px);
 }
-
+.creat-account-btn {
+  display: flex;
+  position: relative;
+  border: none;
+  width: 100%;
+  border-radius: 30px;
+  text-align: center;
+  align-items: center;
+  background-color: #57b846;
+  justify-content: center;
+  color: #ffffff;
+}
+.creat-account-btn:hover {
+  background-color: rgb(36, 36, 36);
+  text-decoration: none;
+}
+.link {
+  text-decoration: none;
+}
 .no-style-button {
   /* background-color: transparent; */
   border: none;

@@ -1,22 +1,20 @@
 import React, { useState } from "react";
-import { FcGoogle, FcAdvance } from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { loginUser, registerUser } from "../redux/actions/index.js";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../redux/actions/index.js";
 import Logo from "./icons/whatsapp-logo-outline.png";
 
-function Login() {
+function Signup() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmitLogin = async (event) => {
+  const handleRegisterLogin = async (event) => {
     event.preventDefault();
-    dispatch(loginUser({ email: email.toLowerCase(), password: password }));
     // try {
-    //   const response = await fetch("http://localhost:3001/users/login", {
+    //   const response = await fetch("http://localhost:3001/users/register", {
     //     method: "POST",
     //     headers: {
     //       "Content-Type": "application/json",
@@ -24,20 +22,27 @@ function Login() {
     //     body: JSON.stringify({
     //       email,
     //       password,
+    //       username,
     //     }),
     //   });
 
     //   if (response.ok) {
-    //     navigate("/");
+    //     navigate("/login");
     //   } else {
     //     const data = await response.json();
-    //     console.log("Please check email and pass correctly", data);
+    //     console.log("Please fill all required field");
     //   }
     // } catch (error) {
     //   alert(error.message);
     // }
+    dispatch(
+      registerUser({
+        email: email.toLowerCase(),
+        password: password,
+        username: username,
+      })
+    );
   };
-
   return (
     <div className="login-container">
       <div className="login-form w-50 d-flex bg-white justify-content-center align-items-center ">
@@ -45,7 +50,7 @@ function Login() {
           <img src={Logo} alt="logo" className="logo-login"></img>
         </div>
         <div className="d-flex flex-column login-text">
-          <h1 className="text-center mb-3">Login</h1>
+          <h1 className="text-center mb-3">Register</h1>
           <input
             type="email"
             placeholder="Email"
@@ -61,37 +66,31 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             className="login-field  rounded-pill"
           />
+          <div>
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="login-field  rounded-pill"
+            />
+            <input
+              type="file"
+              placeholder="Avatar"
+              className="login-field  rounded-pill"
+            />
+          </div>
 
           <button
-            onClick={handleSubmitLogin}
+            onClick={handleRegisterLogin}
             className="login-button rounded-pill mt-3 py-2 text-white"
           >
-            Login
+            Register
           </button>
-          <Link
-            to={
-              "https://accounts.google.com/v3/signin/identifier?dsh=S-183850306%3A1677165200727690&authuser=0&continue=https%3A%2F%2Fmail.google.com&ec=GAlAFw&hl=en&service=mail&flowName=GlifWebSignIn&flowEntry=AddSession"
-            }
-          >
-            <button className="creat-account-btn mt-2 ">
-              <span className=" creat-account-icon mb-2">
-                <FcGoogle className="mr-3" />
-              </span>
-              <p>Continue with Google</p>
-            </button>
-          </Link>
-          <Link to={"/register"}>
-            <button className="creat-account-btn mt-2">
-              <span className=" creat-account-icon mb-2">
-                <FcAdvance className="mr-3" />
-              </span>
-              <p className="mb-2">Create an account</p>
-            </button>
-          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Signup;

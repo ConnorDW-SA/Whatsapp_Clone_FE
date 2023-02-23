@@ -16,6 +16,7 @@ export const loginUser = (user) => {
       let response = await fetch(`http://localhost:3001/users/login`, option);
       if (response.ok) {
         const data = await response.json();
+
         console.log(data);
         if (data.accessToken) {
           localStorage.setItem("accessToken", data.accessToken);
