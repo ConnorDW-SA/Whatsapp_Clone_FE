@@ -14,24 +14,21 @@ function Login() {
   const handleShow = () => setShow(true);
   const path = window.location.pathname;
   console.log(username);
-  const user =
-    path === "/login"
-      ? {
-          email: email.toLowerCase(),
-          password: password,
-        }
-      : {
-          email: email.toLowerCase(),
-          password: password,
-          username: username,
-        };
+
   const handleSubmitLogin = (event) => {
     event.preventDefault();
-    dispatch(loginUser(user));
+    dispatch(loginUser({ email: email.toLowerCase(), password: password }));
   };
+
   const handleRegisterLogin = (event) => {
-    event.preventDefault();
-    dispatch(registerUser(user));
+    event.preventDefault({ email: email.toLowerCase(), password: password });
+    dispatch(
+      registerUser({
+        email: email.toLowerCase(),
+        password: password,
+        username: username
+      })
+    );
   };
   return (
     <div className="login-container">
