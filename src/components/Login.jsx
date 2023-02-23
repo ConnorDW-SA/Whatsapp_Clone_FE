@@ -6,11 +6,7 @@ import { connect } from "react-redux";
 import { login, register } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
-import {
-  loginUser,
-  registerUser,
-  SET_ONLINE_USERS,
-} from "../redux/actions/index.js";
+import { SET_ONLINE_USERS } from "../redux/actions/index.js";
 
 import Logo from "./icons/whatsapp-logo-outline.png";
 import { io } from "socket.io-client";
@@ -37,30 +33,17 @@ function Login({ login }) {
   const [avatar, setAvatar] = useState("");
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
 
-
-  const user =
-    path === "/"
-      ? {
-          email: email.toLowerCase(),
-          password: password,
-        }
-      : {
-          username: username,
-          email: email.toLowerCase(),
-          password: password,
-        };
-  const handleSubmitLogin = (event) => {
-    event.preventDefault();
-    dispatch(loginUser(user));
-    //here we will be emitting a "setUsername" event(the server from BE will be configured to listen for that)
-    socket.emit("setUsername", { username });
-  };
-  const handleRegisterLogin = (event) => {
-    event.preventDefault();
-    dispatch(registerUser(user));
-    //here we will be emitting a "setUsername" event(the server from BE will be configured to listen for that)
-    socket.emit("setUsername", { username });
-  };
+  // const user =
+  //   path === "/"
+  //     ? {
+  //         email: email.toLowerCase(),
+  //         password: password,
+  //       }
+  //     : {
+  //         username: username,
+  //         email: email.toLowerCase(),
+  //         password: password,
+  //       };
 
   useEffect(() => {
     socket.on("welcome", (welcomeMessage) => {
@@ -79,24 +62,25 @@ function Login({ login }) {
       });
     });
   });
-  return (
-    <div className="login-container">
-      <div className="login-form w-50 d-flex bg-white justify-content-center align-items-center ">
-        <div className="login-image">
-          <img src={Logo} alt="logo" className="logo-login"></img>
 
   function handleShowRegistrationForm() {
     setShowRegistrationForm(true);
   }
 
   const handleRegistration = () => {
-    dispatch(register(username, email, password, avatar)).then(() =>
-      navigate("/")
-    );
+    dispatch(register(username, email, password, avatar))
+      .then(() => {
+        socket.emit("setUsername", { username }); //here we will be emitting a "setUsername" event(the server from BE will be configured to listen for that)
+      })
+      .then(() => navigate("/"));
   };
 
   const handleLogin = () => {
-    dispatch(login(email, password)).then(() => navigate("/"));
+    dispatch(login(email, password))
+      .then(() => {
+        socket.emit("setUsername", { username }); //here we will be emitting a "setUsername" event(the server from BE will be configured to listen for that)
+      })
+      .then(() => navigate("/"));
   };
 
   const handleBack = () => {
@@ -154,7 +138,6 @@ function Login({ login }) {
               Back
             </button>
           </div>
-
         </div>
       </div>
     );

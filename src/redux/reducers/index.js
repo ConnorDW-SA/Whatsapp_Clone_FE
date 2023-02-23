@@ -4,12 +4,9 @@ import {
   SET_CHAT_HISTORY,
   SET_CURRENT_CHAT,
   SET_MY_PROFILE,
-
   SET_ONLINE_USERS,
   USER_LOGIN,
-
-  LOGIN_REQUEST
-
+  LOGIN_REQUEST,
 } from "../actions";
 
 const initialState = {
@@ -18,16 +15,15 @@ const initialState = {
     username: "",
     email: "",
     avatar: "",
-    about: ""
+    about: "",
   },
   chats: {
     active: {},
-    list: []
+    list: [],
   },
 
   myProfile: false,
   onlineUsers: [],
-
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -35,7 +31,7 @@ const mainReducer = (state = initialState, action) => {
     case SET_CURRENT_CHAT: {
       return {
         ...state,
-        chats: { ...state.chats, active: action.payload }
+        chats: { ...state.chats, active: action.payload },
       };
     }
 
@@ -44,8 +40,8 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         chats: {
           ...state.chats,
-          list: action.payload
-        }
+          list: action.payload,
+        },
       };
     }
 
@@ -83,20 +79,17 @@ const mainReducer = (state = initialState, action) => {
       };
     }
 
-    case USER_LOGIN: {
-
     case LOGIN_REQUEST: {
-
       return {
         ...state,
-        userInfo: action.payload
+        userInfo: action.payload,
       };
     }
 
     case SET_MY_PROFILE: {
       return {
         ...state,
-        myProfile: action.payload
+        myProfile: action.payload,
       };
     }
     case SET_ONLINE_USERS: {
