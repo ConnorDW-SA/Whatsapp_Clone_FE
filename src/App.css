@@ -67,6 +67,7 @@
   background-color: #f0f2f5;
   height: 59px;
   position: relative;
+  border-right: 1px solid #d9dadc;
 }
 
 .my-icon {
@@ -83,6 +84,14 @@
   cursor: pointer;
 }
 
+.header-icon-clicked {
+  padding: 0.5rem;
+  color: #54656f;
+  cursor: pointer;
+  background-color: lightgray;
+  border-radius: 50%;
+}
+
 .relative {
   position: relative;
 }
@@ -93,10 +102,15 @@
   left: 0;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .absolute-options {
   position: absolute;
   top: 100%;
   right: 1rem;
+  z-index: 10;
 }
 
 .dropdown-ul {
@@ -215,6 +229,7 @@
   font-size: 0.8rem;
 }
 
+/*<<<<<<< HEAD*/
 .focus {
   background-color: #fff;
 }
@@ -231,6 +246,76 @@
   align-items: center;
 }
 
+/* .............My Profile */
+.my-profile-header {
+  height: 108px;
+  width: 100%;
+  background-color: #008069;
+  padding: 0px 20px 0px 23px;
+  display: flex;
+  align-items: end;
+}
+
+.my-profile-header-items {
+  height: 59px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.my-profile-text {
+  font-size: 1.2rem;
+}
+
+.my-profile-picture {
+  height: 200px;
+  width: 100%;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 28px;
+}
+
+.mp-pic {
+  width: 200px;
+  height: 200px;
+}
+
+.wtsp-d-green {
+  color: #008069;
+}
+
+.your-name {
+  background-color: white;
+
+  height: 93px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 14px 30px 10px;
+}
+
+.my-profile-info-text {
+  height: 40px;
+  margin: 4px 20px 28px 30px;
+  color: grey;
+  font-size: 14px;
+}
+
+/* .............My Profile */
+
+/* ...............................Log in................ */
+.login-container {
+  height: 84.5vh;
+
+  z-index: 100;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*>>>>>>> develop*/
 .logo-login {
   width: 20vh;
   height: 20vh;
@@ -291,13 +376,23 @@
 /* Header -------------------------------------------------- */
 
 .main-header-convo {
-  height: 8%;
+  height: 59px;
   background-color: #f0f2f5;
 }
 
 .thumbnail-header {
   width: 40px;
   height: 40px;
+}
+
+.target-user {
+  font-weight: 500;
+}
+
+.last-seen {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #54656f;
 }
 
 /* Header -------------------------------------------------- */
@@ -334,15 +429,14 @@
   background-color: #d9fdd3;
 }
 
-.person-one-messages {
-}
 /* Main -------------------------------------------------- */
 
 /* Footer -------------------------------------------------- */
 
 .convo-footer {
   background-color: #f0f2f5;
-  height: 8%;
+  height: 59px;
+  border-left: 1px solid #d9dadc;
 }
 
 .message-input {

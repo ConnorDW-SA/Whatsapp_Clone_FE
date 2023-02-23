@@ -5,8 +5,12 @@ import { ReactComponent as Circle } from "./icons/circle.svg";
 import { ReactComponent as Chat } from "./icons/chat.svg";
 import { ReactComponent as ThreeDots } from "./icons/threeDots.svg";
 import Dropdown from "./Dropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { SET_MY_PROFILE } from "../redux/actions";
 
 function SideHeader() {
+  const dispatch = useDispatch();
+
   const textContent = [
     "New Group",
     "New Community",
@@ -16,6 +20,8 @@ function SideHeader() {
   ];
 
   const [optionsClicked, setOptionsClicked] = useState(false);
+
+  const myProfile = useSelector((state) => state.home.myProfile);
 
   return (
     <div className="side-header d-flex justify-content-between">
@@ -28,13 +34,12 @@ function SideHeader() {
       >
         <Dropdown textContent={textContent} />
       </div>
-      <div>
-        <Profile
-          className="my-icon"
-          onClick={() => {
-            setOptionsClicked(!optionsClicked);
-          }}
-        />
+      <div
+        onClick={() => {
+          dispatch({ type: SET_MY_PROFILE, payload: !myProfile });
+        }}
+      >
+        <Profile className="my-icon" />
       </div>
 
       <div className="d-flex align-items-center">
@@ -50,12 +55,13 @@ function SideHeader() {
           <Chat />
         </div>
 
-        <div className="header-icon relative">
-          <ThreeDots
-            onClick={() => {
-              setOptionsClicked(!optionsClicked);
-            }}
-          />{" "}
+        <div
+          onClick={() => {
+            setOptionsClicked(!optionsClicked);
+          }}
+          className={optionsClicked ? "header-icon-clicked" : "header-icon"}
+        >
+          <ThreeDots />{" "}
         </div>
       </div>
     </div>

@@ -1,4 +1,9 @@
-import { ADD_MY_CHATS, SET_CURRENT_CHAT, USER_LOGIN } from "../actions";
+import {
+  ADD_MY_CHATS,
+  SET_CURRENT_CHAT,
+  SET_MY_PROFILE,
+  USER_LOGIN,
+} from "../actions";
 
 const initialState = {
   userInfo: {
@@ -11,6 +16,7 @@ const initialState = {
     active: {},
     list: [],
   },
+  myProfile: false,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -35,6 +41,12 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         userInfo: action.payload,
+      };
+    }
+    case SET_MY_PROFILE: {
+      return {
+        ...state,
+        myProfile: action.payload,
       };
     }
     default:
