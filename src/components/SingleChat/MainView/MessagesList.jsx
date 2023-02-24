@@ -88,6 +88,11 @@ function MessagesList() {
                 : "receiver-msg"
             }
           >
+            {message.user === currentUser._id ? (
+              <div>{currentUser.username}</div>
+            ) : (
+              <div>{message.user}</div>
+            )}
             {message !== null && message.text}
             <div className="message-time">
               {formatTime(message !== null && message.createdAt)}
