@@ -1,38 +1,498 @@
-.App {
-  text-align: center;
+.body {
+  height: 100vh;
+  background-color: #e3e2de;
+  z-index: 100;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.window {
+  width: 100%;
+  max-width: 1600px;
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (min-width: 1441px) {
+  .window {
+    margin: 0 auto;
+    box-shadow: 0 6px 18px black, 0.05;
+    z-index: 2;
+    position: relative;
+    top: 19px;
+    width: calc(100% - 38px);
+    max-width: 1600px;
+    height: calc(100% - 38px);
+  }
+  .body::after {
+    background-color: #04a885;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 127px;
+    content: "";
+    z-index: 0;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.home {
+  height: 100%;
+}
+
+.side-view {
+  width: 30%;
+  height: 100%;
+  background-color: #f0f2f5;
+}
+
+.main-view {
+  width: 70%;
+  height: 100%;
+}
+
+/* Conversations -------------------------------------------------- */
+
+/* Login card -------------------------------------------------- */
+
+.chat-view {
+  width: 70%;
+  height: 100%;
+  background-color: #f0f2f5;
+  border-bottom: 7px solid rgb(62, 202, 62);
+}
+
+.side-header {
+  padding-inline: 1rem;
+  padding-block: 0.625rem;
+  background-color: #f0f2f5;
+  height: 59px;
+  position: relative;
+  border-right: 1px solid #d9dadc;
+}
+
+.my-icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: bisque;
+  cursor: pointer;
+}
+
+.header-icon {
+  padding: 0.5rem;
+  color: #54656f;
+  cursor: pointer;
+}
+
+.header-icon-clicked {
+  padding: 0.5rem;
+  color: #54656f;
+  cursor: pointer;
+  background-color: lightgray;
+  border-radius: 50%;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.absolute-options {
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  z-index: 10;
+}
+
+.dropdown-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  color: #54656f;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px -5px #000000;
+  padding-block: 8px;
+}
+
+.dropdown-li {
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dropdown-li:hover {
+  background-color: #f5f6f6;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-block {
+  display: block;
+}
+
+.search-container {
+  background-color: white;
+  padding-inline: 1rem;
+  padding-block: 0.625rem;
+  height: 49px;
+  width: 100%;
+}
+
+.search-bar {
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  color: #54656f;
+}
+
+.input {
+  background-color: #f0f2f5;
+  border: none;
+  height: 35px;
+  width: 100%;
+  font-size: 15px;
+  border-radius: 8px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.filter-chats {
+  cursor: pointer;
+}
+
+.chats-container {
+  background-color: #f0f2f5;
+  overflow: auto;
+  height: calc(100% - 108px);
+  width: 100%;
+  overflow: auto;
+}
+
+.chat-card {
+  width: 100%;
+  height: 72px;
+  cursor: pointer;
+  padding-inline: 1rem;
+  padding-top: 0.625rem;
+  background-color: white;
+}
+
+.chat-card:hover {
+  background-color: #f5f6f6;
+}
+
+.chat-card-active {
+  width: 100%;
+  height: 72px;
+  cursor: pointer;
+  padding-inline: 1rem;
+  padding-top: 0.625rem;
+  background-color: #f0f2f5;
+}
+
+.chats-profile {
+  width: 49px;
+  height: 49px;
+}
+
+.profile-name {
+  font-weight: 500;
+}
+
+.chat-preview {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 235px;
+  font-size: 0.8rem;
+}
+
+.chat-prev-border {
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.chat-date {
+  font-size: 0.8rem;
+}
+
+/* .............My Profile */
+.my-profile-header {
+  height: 108px;
+  width: 100%;
+  background-color: #008069;
+  padding: 0px 20px 0px 23px;
   display: flex;
-  flex-direction: column;
+  align-items: end;
+}
+
+.my-profile-header-items {
+  height: 59px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.my-profile-text {
+  font-size: 1.2rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.my-profile-picture {
+  height: 200px;
+  width: 100%;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 28px;
+}
+
+.mp-pic {
+  width: 200px;
+  height: 200px;
+}
+
+.wtsp-d-green {
+  color: #008069;
+}
+
+.your-name {
+  background-color: white;
+
+  height: 93px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 14px 30px 10px;
+}
+
+.my-profile-info-text {
+  height: 40px;
+  margin: 4px 20px 28px 30px;
+  color: grey;
+  font-size: 14px;
+}
+
+/* .............My Profile */
+
+/* ...............................Log in................ */
+.login-container {
+  height: 84.5vh;
+
+  z-index: 100;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-login {
+  width: 20vh;
+  height: 20vh;
+  margin-bottom: 1rem;
+}
+
+.login-form {
+  height: 80%;
+  border-radius: 15px;
+}
+
+.login-image {
+  width: 35%;
+}
+
+.login-text {
+  width: 50%;
+}
+
+.login-field {
+  width: 100%;
+  height: 40px;
+  border: none;
+  padding-inline: 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background-color: #e6e6e6;
+}
+
+.login-field:focus {
+  outline: none;
+}
+
+.login-button {
+  background-color: #57b846;
+  transition: background-color 0.6s ease;
+  border: none;
+}
+
+.login-button:hover {
+  background-color: rgb(36, 36, 36);
+}
+
+.google-icon-login {
+  margin-right: 200px;
+  top: 5px;
+  text-align: center;
+  position: absolute;
+
+  transform: translateY(-2px);
+}
+.creat-account-btn {
+  display: flex;
+  position: relative;
+  border: none;
+  width: 100%;
+  border-radius: 30px;
+  text-align: center;
+  align-items: center;
+  background-color: #57b846;
+  justify-content: center;
+  color: #ffffff;
+}
+.creat-account-btn:hover {
+  background-color: rgb(36, 36, 36);
+  text-decoration: none;
+}
+
+.no-style-button {
+  border: none;
+  background-color: transparent;
+  color: #57b846;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.link-no-style:hover {
+  text-decoration: unset;
+  color: #57b846;
+}
+
+/* Login card -------------------------------------------------- */
+
+/* Header -------------------------------------------------- */
+
+.main-header-convo {
+  height: 59px;
+  background-color: #f0f2f5;
+}
+
+.thumbnail-header {
+  width: 40px;
+  height: 40px;
+}
+
+.target-user {
+  font-weight: 500;
+}
+
+.last-seen {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #54656f;
+}
+
+/* Header -------------------------------------------------- */
+
+/* Main -------------------------------------------------- */
+
+.convo-div {
+  background-image: url("./components/SingleChat/icons/BG.png");
+  background-color: #f0eae2;
+  background-size: fill;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.message-container {
+  max-width: fit-content;
+  word-break: break-word;
+  white-space: normal;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.timestamp-messages {
+  position: absolute;
+  bottom: 0.2rem;
+  right: 0.4rem;
+  font-size: 0.8em;
+  color: gray;
+}
+
+.bg-message-whatsapp {
+  background-color: #d9fdd3;
+}
+
+/* Main -------------------------------------------------- */
+
+/* Footer -------------------------------------------------- */
+
+.convo-footer {
+  background-color: #f0f2f5;
+  height: 59px;
+  border-left: 1px solid #d9dadc;
+}
+
+.message-input {
+  border-color: transparent !important;
+}
+
+.message-input:focus {
+  outline: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Footer -------------------------------------------------- */
+
+/* Conversations -------------------------------------------------- */
+.messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.sender-msg {
+  width: 50%;
+  margin-block: 1rem;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 8px 6px -8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 8px 6px -8px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+}
+
+.receiver-msg {
+  margin-left: 50%;
+  width: 50%;
+  margin-block: 1rem;
+  padding: 0.5rem;
+  background-color: #d9fdd3;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 8px 6px -8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 8px 6px -8px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+}
+
+.message-time {
+  width: 100%;
+  text-align: right;
+  font-size: 11px;
+  color: #667781;
 }
