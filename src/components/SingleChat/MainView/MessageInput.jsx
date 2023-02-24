@@ -35,7 +35,7 @@ function MessageInput() {
       });
       dispatch({
         type: SET_CHAT_HISTORY,
-        payload: payload,
+        payload: payload[1],
       });
 
       // 3. Send the http req to BE (POST method)

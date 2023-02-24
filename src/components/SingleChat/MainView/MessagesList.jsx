@@ -30,11 +30,11 @@ function MessagesList() {
 
       socket.on("newMessage", (newMessage) => {
         console.log(newMessage);
-        const payload = [currentChat._id, newMessage.message];
-        dispatch({
-          type: SET_CHATS_HISTORY,
-          payload: payload,
-        });
+        const payload = newMessage.message;
+        // dispatch({
+        //   type: SET_CHATS_HISTORY,
+        //   payload: payload,
+        // });
         dispatch({
           type: SET_CHAT_HISTORY,
           payload: payload,
@@ -81,13 +81,17 @@ function MessagesList() {
       <ul className="messages">
         {currentChat.messages.map((message) => (
           <li
-            key={message._id}
+            key={message !== null && message._id}
             className={
-              message.user === currentUser._id ? "sender-msg" : "receiver-msg"
+              message !== null && message.user === currentUser._id
+                ? "sender-msg"
+                : "receiver-msg"
             }
           >
-            {message.text}
-            <div className="message-time">{formatTime(message.createdAt)}</div>
+            {message !== null && message.text}
+            <div className="message-time">
+              {formatTime(message !== null && message.createdAt)}
+            </div>
           </li>
         ))}
       </ul>

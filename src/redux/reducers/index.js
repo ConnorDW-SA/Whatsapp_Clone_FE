@@ -18,7 +18,14 @@ const initialState = {
     about: "",
   },
   chats: {
-    active: {},
+    active: {
+      _id: "",
+      users: [],
+      messages: [],
+      avatar: "",
+      __v: 0,
+      updatedAt: "",
+    },
     list: [],
   },
 
@@ -46,38 +53,40 @@ const mainReducer = (state = initialState, action) => {
     }
 
     case SET_CHAT_HISTORY: {
-      const { chatId, newMessage } = action.payload;
       return {
         ...state,
         chats: {
           ...state.chats,
-          active: { messages: [...state.chats.active.messages, newMessage] },
+          active: {
+            ...state.chats.active,
+            messages: [...state.chats.active.messages, action.payload],
+          },
         },
       };
     }
-    case SET_CHATS_HISTORY: {
-      const { chatId, newMessage } = action.payload;
-      const chatIndex = state.chats.list.findIndex(
-        (chat) => chat._id === chatId
-      );
-      if (chatIndex === -1) {
-        // Chat not found, return current state
-        return state;
-      }
-      const updatedChat = {
-        ...state.chats.list[chatIndex],
-        messages: [...state.chats.list[chatIndex].messages, newMessage],
-      };
-      const updatedChats = [
-        ...state.chats.list.slice(0, chatIndex),
-        updatedChat,
-        ...state.chats.list.slice(chatIndex + 1),
-      ];
-      return {
-        ...state,
-        chats: updatedChats,
-      };
-    }
+    // case SET_CHATS_HISTORY: {
+    //   const { chatId, newMessage } = action.payload;
+    //   const chatIndex = state.chats.list.findIndex(
+    //     (chat) => chat._id === chatId
+    //   );
+    //   if (chatIndex === -1) {
+    //     // Chat not found, return current state
+    //     return state;
+    //   }
+    //   const updatedChat = {
+    //     ...state.chats.list[chatIndex],
+    //     messages: [...state.chats.list[chatIndex].messages, newMessage],
+    //   };
+    //   const updatedChats = [
+    //     ...state.chats.list.slice(0, chatIndex),
+    //     updatedChat,
+    //     ...state.chats.list.slice(chatIndex + 1),
+    //   ];
+    //   return {
+    //     ...state,
+    //     chats: updatedChats,
+    //   };
+    // }
 
     case LOGIN_REQUEST: {
       return {
