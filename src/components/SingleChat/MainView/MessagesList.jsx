@@ -30,14 +30,14 @@ function MessagesList() {
 
       socket.on("newMessage", (newMessage) => {
         console.log(newMessage);
-        const payload = newMessage.message;
-        // dispatch({
-        //   type: SET_CHATS_HISTORY,
-        //   payload: payload,
-        // });
+        const payload = [currentChat._id, newMessage.message];
+        dispatch({
+          type: SET_CHATS_HISTORY,
+          payload: payload,
+        });
         dispatch({
           type: SET_CHAT_HISTORY,
-          payload: payload,
+          payload: payload[1],
         });
       });
     });

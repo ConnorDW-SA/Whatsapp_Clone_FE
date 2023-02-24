@@ -26,16 +26,14 @@ function MessageInput() {
         text: text,
         user: currentUser._id,
         chat: currentChat._id,
+        createdAt: new Date(),
       };
       // 2. Update the chat history (Redux)
-      const payload = [currentChat._id, newMessage];
-      dispatch({
-        type: SET_CHATS_HISTORY,
-        payload: payload,
-      });
+      const payload = newMessage;
+
       dispatch({
         type: SET_CHAT_HISTORY,
-        payload: payload[1],
+        payload: payload,
       });
 
       // 3. Send the http req to BE (POST method)

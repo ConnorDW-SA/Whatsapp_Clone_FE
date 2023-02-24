@@ -64,29 +64,29 @@ const mainReducer = (state = initialState, action) => {
         },
       };
     }
-    // case SET_CHATS_HISTORY: {
-    //   const { chatId, newMessage } = action.payload;
-    //   const chatIndex = state.chats.list.findIndex(
-    //     (chat) => chat._id === chatId
-    //   );
-    //   if (chatIndex === -1) {
-    //     // Chat not found, return current state
-    //     return state;
-    //   }
-    //   const updatedChat = {
-    //     ...state.chats.list[chatIndex],
-    //     messages: [...state.chats.list[chatIndex].messages, newMessage],
-    //   };
-    //   const updatedChats = [
-    //     ...state.chats.list.slice(0, chatIndex),
-    //     updatedChat,
-    //     ...state.chats.list.slice(chatIndex + 1),
-    //   ];
-    //   return {
-    //     ...state,
-    //     chats: updatedChats,
-    //   };
-    // }
+    case SET_CHATS_HISTORY: {
+      const [chatId, newMessage] = action.payload;
+      console.log(chatId);
+      console.log(newMessage);
+      const chatIndex = state.chats.list.findIndex(
+        (chat) => chat._id === chatId
+      );
+      console.log(chatIndex);
+      if (chatIndex === -1) {
+        // Chat not found, return current state
+        return state;
+      }
+
+      const updatedList = state.chats.list[chatIndex].push(newMessage);
+
+      return {
+        ...state,
+        chats: {
+          ...state.chats,
+          list: updatedList,
+        },
+      };
+    }
 
     case LOGIN_REQUEST: {
       return {
