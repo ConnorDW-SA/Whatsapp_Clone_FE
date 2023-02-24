@@ -1,16 +1,8 @@
 import React, { useEffect } from "react";
-import MessagePersonOne from "../Chats/PersonOne.json";
-import MessagePersonTwo from "../Chats/PersonTwo.json";
 import { io } from "socket.io-client";
 import { SET_CHATS_HISTORY, SET_CHAT_HISTORY } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-
-function formatTime(timeString) {
-  const date = new Date(timeString);
-  const hour = date.getHours().toString().padStart(2, "0");
-  const minute = date.getMinutes().toString().padStart(2, "0");
-  return `${hour}:${minute}`;
-}
+import { format } from "date-fns";
 
 const socket = io("http://localhost:3001", { transports: ["websocket"] });
 
@@ -33,7 +25,7 @@ function MessagesList() {
         const payload = [currentChat._id, newMessage.message];
         dispatch({
           type: SET_CHATS_HISTORY,
-          payload: payload,
+          payload: payload
         });
         // dispatch({
         //   type: SET_CHAT_HISTORY,
@@ -95,7 +87,7 @@ function MessagesList() {
             )}
             {message !== null && message.text}
             <div className="message-time">
-              {formatTime(message !== null && message.createdAt)}
+              {message !== null && format(new Date(message.createdAt), "HH:mm")}
             </div>
           </li>
         ))}

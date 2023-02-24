@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as SearchIcon } from "./icons/search.svg";
 import { ReactComponent as Filter } from "./icons/filter.svg";
 
-function Search() {
+function Search({ setSearchQuery }) {
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <div className="search-container d-flex justify-content-between align-items-center">
       <div className="search-bar flex-grow-1">
@@ -14,6 +18,7 @@ function Search() {
           <input
             className="input"
             type="text"
+            onChange={handleSearchChange}
             placeholder="Search or start a new chat"
           />
         </form>
