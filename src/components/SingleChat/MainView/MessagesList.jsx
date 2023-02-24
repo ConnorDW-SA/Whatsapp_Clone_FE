@@ -27,21 +27,27 @@ function MessagesList() {
   useEffect(() => {
     socket.on("welcome", (welcomeMessage) => {
       console.log(welcomeMessage);
+      console.log("current in useEffect", currentChat);
 
       socket.on("newMessage", (newMessage) => {
         console.log(newMessage);
-        const payload = [currentChat._id, newMessage.message];
+        const payload = [newMessage.message.chat, newMessage.message];
         dispatch({
           type: SET_CHATS_HISTORY,
           payload: payload,
         });
-        // dispatch({
-        //   type: SET_CHAT_HISTORY,
-        //   payload: payload,
-        // });
+
+        console.log("new message chat", newMessage.message.chat);
+        if (currentChat._id === newMessage.message.chat) {
+          console.log("appending to the current chat");
+          dispatch({
+            type: SET_CHAT_HISTORY,
+            payload: newMessage.message,
+          });
+        }
       });
     });
-  });
+  }, [socket]);
 
   return (
     <div className="d-flex flex-column convo-div">

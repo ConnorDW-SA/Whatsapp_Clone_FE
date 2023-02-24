@@ -31,10 +31,10 @@ function MessageInput() {
       // 2. Update the chat history (Redux)
       const payload = newMessage;
 
-      dispatch({
-        type: SET_CHAT_HISTORY,
-        payload: payload,
-      });
+      // dispatch({
+      //   type: SET_CHAT_HISTORY,
+      //   payload: payload,
+      // });
 
       // 3. Send the http req to BE (POST method)
       const response = await fetch("http://localhost:3001/messages", {
