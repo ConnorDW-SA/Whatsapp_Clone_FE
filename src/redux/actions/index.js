@@ -5,3 +5,5 @@ export const SET_ONLINE_USERS = "SET_ONLINE_USERS";
 export const SET_CHATS_HISTORY = "SET_CHATS_HISTORY";
 export const SET_CHAT_HISTORY = "SET_CHAT_HISTORY";
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const GET_USERS = "GET_USERS";
+export const UPDATE_CHATS = "UPDATE_CHATS";

@@ -15,7 +15,7 @@ function ChatHeader() {
     "Clear messages",
     "Delete chat",
     "Report",
-    "Block",
+    "Block"
   ];
   return (
     <div className="d-flex w-100 justify-content-between align-items-center main-header-convo relative">

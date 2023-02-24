@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ReactComponent as SmileyOne } from "../icons/SmileyOne.svg";
 import { ReactComponent as Paperclip } from "../icons/Paperclip.svg";
 import { ReactComponent as Mic } from "../icons/Mic.svg";
+import { ReactComponent as Arrow } from "../icons/Arrow.svg";
 import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_CHATS_HISTORY } from "../../../redux/actions";
@@ -26,14 +27,14 @@ function MessageInput() {
         text: text,
         user: currentUser._id,
         chat: currentChat._id,
-        createdAt: new Date(),
+        createdAt: new Date()
       };
       // 2. Update the chat history (Redux)
       const payload = newMessage;
 
       dispatch({
         type: SET_CHAT_HISTORY,
-        payload: payload,
+        payload: payload
       });
 
       // 3. Send the http req to BE (POST method)
@@ -42,8 +43,8 @@ function MessageInput() {
         body: JSON.stringify(newMessage),
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"
+        }
       });
       if (response) {
         const data = await response.json();
@@ -80,13 +81,23 @@ function MessageInput() {
           sendMessage();
         }}
       />
-      <span className="m-3 text-muted">
-        <Mic
-          onClick={() => {
-            sendMessage();
-          }}
-        />
-      </span>
+      {text.length === 0 ? (
+        <span className="m-3 text-muted">
+          <Mic
+            onClick={() => {
+              sendMessage();
+            }}
+          />
+        </span>
+      ) : (
+        <span className="m-3 text-muted">
+          <Arrow
+            onClick={() => {
+              sendMessage();
+            }}
+          />
+        </span>
+      )}
     </div>
   );
 }

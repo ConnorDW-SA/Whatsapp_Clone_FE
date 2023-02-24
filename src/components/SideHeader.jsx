@@ -16,7 +16,7 @@ function SideHeader() {
     "New Community",
     "Starred messages",
     "Settings",
-    "Log out",
+    "Log out"
   ];
 
   const [optionsClicked, setOptionsClicked] = useState(false);

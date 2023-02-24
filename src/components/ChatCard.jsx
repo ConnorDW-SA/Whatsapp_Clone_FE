@@ -2,6 +2,7 @@ import React from "react";
 import { ReactComponent as Profile } from "./icons/profile.svg";
 import { SET_CURRENT_CHAT } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { format } from "date-fns";
 
 function ChatCard(props) {
   const chat = props.chat;
@@ -21,12 +22,11 @@ function ChatCard(props) {
     try {
       const response = await fetch(`http://localhost:3001/chats/${chat._id}`, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
       if (response) {
         const data = await response.json();
-
         dispatch({ type: SET_CURRENT_CHAT, payload: data });
       } else {
         console.log("Error while fetching the messages");
@@ -52,7 +52,8 @@ function ChatCard(props) {
             {targetUser && targetUser.username}
           </div>
           <div className="chat-date">
-            {lastMessage && lastMessage.createdAt}
+            {lastMessage &&
+              format(new Date(lastMessage.createdAt), "dd/MM/yyyy")}
           </div>
         </div>
         <div className="chat-preview">{lastMessage && lastMessage.text}</div>

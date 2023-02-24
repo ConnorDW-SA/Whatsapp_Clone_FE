@@ -2,12 +2,31 @@ import React, { useEffect } from "react";
 import SideView from "./SideView";
 
 import { useDispatch } from "react-redux";
-import { ADD_MY_CHATS } from "../redux/actions";
+import { ADD_MY_CHATS, GET_USERS } from "../redux/actions";
 import MainView from "./SingleChat/MainView/MainView";
 
 function Home() {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("accessToken");
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/users", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      if (response) {
+        const data = await response.json();
+        dispatch({
+          type: GET_USERS,
+          payload: data
+        });
+      } else {
+        console.log("Error while fetching the users");
+      }
+    } catch (error) {}
+  };
 
   const fetchMyChats = async () => {
     try {
@@ -32,6 +51,10 @@ function Home() {
 
   useEffect(() => {
     fetchMyChats();
+  }, []);
+
+  useEffect(() => {
+    fetchUsers();
   }, []);
 
   return (

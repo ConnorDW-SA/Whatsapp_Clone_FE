@@ -5,8 +5,9 @@ import {
   SET_CURRENT_CHAT,
   SET_MY_PROFILE,
   SET_ONLINE_USERS,
-  USER_LOGIN,
+  GET_USERS,
   LOGIN_REQUEST,
+  UPDATE_CHATS
 } from "../actions";
 
 const initialState = {
@@ -15,7 +16,7 @@ const initialState = {
     username: "",
     email: "",
     avatar: "",
-    about: "",
+    about: ""
   },
   chats: {
     active: {
@@ -24,13 +25,14 @@ const initialState = {
       messages: [],
       avatar: "",
       __v: 0,
-      updatedAt: "",
+      updatedAt: ""
     },
-    list: [],
+    list: []
   },
 
   myProfile: false,
   onlineUsers: [],
+  users: []
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -38,7 +40,20 @@ const mainReducer = (state = initialState, action) => {
     case SET_CURRENT_CHAT: {
       return {
         ...state,
-        chats: { ...state.chats, active: action.payload },
+        chats: { ...state.chats, active: action.payload }
+      };
+    }
+    case UPDATE_CHATS: {
+      return {
+        ...state,
+        chats: { ...state.chats, list: [...state.chats.list, action.payload] }
+      };
+    }
+
+    case GET_USERS: {
+      return {
+        ...state,
+        users: action.payload
       };
     }
 
@@ -47,8 +62,8 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         chats: {
           ...state.chats,
-          list: action.payload,
-        },
+          list: action.payload
+        }
       };
     }
 
@@ -59,9 +74,9 @@ const mainReducer = (state = initialState, action) => {
           ...state.chats,
           active: {
             ...state.chats.active,
-            messages: [...state.chats.active.messages, action.payload],
-          },
-        },
+            messages: [...state.chats.active.messages, action.payload]
+          }
+        }
       };
     }
     case SET_CHATS_HISTORY: {
@@ -84,28 +99,28 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         chats: {
           ...state.chats,
-          list: updatedList,
-        },
+          list: updatedList
+        }
       };
     }
 
     case LOGIN_REQUEST: {
       return {
         ...state,
-        userInfo: action.payload,
+        userInfo: action.payload
       };
     }
 
     case SET_MY_PROFILE: {
       return {
         ...state,
-        myProfile: action.payload,
+        myProfile: action.payload
       };
     }
     case SET_ONLINE_USERS: {
       return {
         ...state,
-        onlineUsers: action.payload,
+        onlineUsers: action.payload
       };
     }
     default:
