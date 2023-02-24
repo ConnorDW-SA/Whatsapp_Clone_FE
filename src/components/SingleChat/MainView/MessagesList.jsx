@@ -81,6 +81,7 @@ function MessagesList() {
       <ul className="messages">
         {currentChat.messages.map((message) => (
           <li
+            key={message._id}
             className={
               message.user === currentUser._id ? "sender-msg" : "receiver-msg"
             }
