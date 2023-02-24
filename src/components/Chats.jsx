@@ -8,7 +8,8 @@ function Chats() {
 
   return (
     <div className="chats-container">
-      {/* {chats && chats.map((chat) => <ChatCard key={chat._id} chat={chat} />)} */}
+      {chats.length !== 0 &&
+        chats.map((chat) => <ChatCard key={chat._id} chat={chat} />)}
     </div>
   );
 }

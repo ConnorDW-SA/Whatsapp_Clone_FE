@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FcGoogle, FcAdvance } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
-import { login, register } from "../redux/actions";
+import { connect, useSelector } from "react-redux";
+import { LOGIN_REQUEST } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
 import { SET_ONLINE_USERS } from "../redux/actions/index.js";
@@ -32,6 +32,7 @@ function Login({ login }) {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const currentUsername = useSelector((state) => state.home.userInfo.username);
 
   // const user =
   //   path === "/"
@@ -44,6 +45,9 @@ function Login({ login }) {
   //         email: email.toLowerCase(),
   //         password: password,
   //       };
+
+  const userLogin = { email, password };
+  const userRegister = { email, password, username, avatar };
 
   useEffect(() => {
     socket.on("welcome", (welcomeMessage) => {
@@ -67,20 +71,80 @@ function Login({ login }) {
     setShowRegistrationForm(true);
   }
 
-  const handleRegistration = () => {
-    dispatch(register(username, email, password, avatar))
-      .then(() => {
-        socket.emit("setUsername", { username }); //here we will be emitting a "setUsername" event(the server from BE will be configured to listen for that)
-      })
-      .then(() => navigate("/"));
+  // const handleRegistration = () => {
+  //   dispatch(register(username, email, password, avatar));
+
+  //   socket.emit("setUsername", { username }); //here we will be emitting a "setUsername" event(the server from BE will be configured to listen for that)
+
+  //   navigate("/");
+  // };
+
+  const fetchMyData = async (data) => {
+    try {
+      const response = await fetch("http://localhost:3001/users/me", {
+        headers: { Authorization: `Bearer ${data.accessToken}` },
+        "Content-Type": "application/json",
+      });
+      if (response.ok) {
+        const data = await response.json();
+
+        dispatch({ type: LOGIN_REQUEST, payload: data });
+      } else {
+        console.log("Error while fetching my profile");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleLogin = () => {
-    dispatch(login(email, password))
-      .then(() => {
+  const handleRegistration = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userRegister),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        localStorage.setItem("accessToken", data.accessToken);
+        await fetchMyData(data);
+
         socket.emit("setUsername", { username }); //here we will be emitting a "setUsername" event(the server from BE will be configured to listen for that)
-      })
-      .then(() => navigate("/"));
+        navigate("/");
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userLogin),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        localStorage.setItem("accessToken", data.accessToken);
+        await fetchMyData(data);
+        socket.emit("setUsername", { currentUsername }); //here we will be emitting a "setUsername" event(the server from BE will be configured to listen for that)
+        navigate("/");
+      } else {
+        console.log("Error while login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleBack = () => {
@@ -198,4 +262,4 @@ function Login({ login }) {
   }
 }
 
-export default connect(null, { login })(Login);
+export default Login;
