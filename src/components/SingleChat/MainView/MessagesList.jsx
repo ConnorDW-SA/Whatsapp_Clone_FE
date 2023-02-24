@@ -15,12 +15,13 @@ function formatTime(timeString) {
 const socket = io("http://localhost:3001", { transports: ["websocket"] });
 
 function MessagesList() {
-  let currentSender = "";
+  // let currentSender = "";
 
-  const messages = [...MessagePersonOne, ...MessagePersonTwo].sort((a, b) =>
-    a.createdAt.localeCompare(b.createdAt)
-  );
+  // const messages = [...MessagePersonOne, ...MessagePersonTwo].sort((a, b) =>
+  //   a.createdAt.localeCompare(b.createdAt)
+  // );
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.home.userInfo);
   const currentChat = useSelector((state) => state.home.chats.active);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ function MessagesList() {
 
   return (
     <div className="d-flex flex-column convo-div">
-      {messages.map((message, index) => {
+      {/* {messages.map((message, index) => {
         const sender = MessagePersonOne.includes(message)
           ? "person-one-messages"
           : "person-two-messages";
@@ -75,7 +76,19 @@ function MessagesList() {
             </span>
           </div>
         );
-      })}
+      })} */}
+      <div>Here are the messages</div>
+      <ul>
+        {currentChat.messages.map((message) => (
+          <li
+            className={
+              message.user === currentUser._id ? "li-white-bg" : "li-green-bg"
+            }
+          >
+            {message.text}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -460,3 +460,10 @@
 /* Footer -------------------------------------------------- */
 
 /* Conversations -------------------------------------------------- */
+.li-white-bg {
+  background-color: white;
+}
+
+.li-green-bg {
+  background-color: #d9fdd3;
+}
