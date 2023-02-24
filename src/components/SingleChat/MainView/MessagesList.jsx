@@ -35,10 +35,10 @@ function MessagesList() {
           type: SET_CHATS_HISTORY,
           payload: payload,
         });
-        dispatch({
-          type: SET_CHAT_HISTORY,
-          payload: payload[1],
-        });
+        // dispatch({
+        //   type: SET_CHAT_HISTORY,
+        //   payload: payload,
+        // });
       });
     });
   });
