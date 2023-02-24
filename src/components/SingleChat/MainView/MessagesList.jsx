@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MessagePersonOne from "../Chats/PersonOne.json";
 import MessagePersonTwo from "../Chats/PersonTwo.json";
+import { io } from "socket.io-client";
+import { SET_CHATS_HISTORY, SET_CHAT_HISTORY } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 function formatTime(timeString) {
   const date = new Date(timeString);
@@ -9,16 +12,40 @@ function formatTime(timeString) {
   return `${hour}:${minute}`;
 }
 
-function MessagesList() {
-  let currentSender = "";
+const socket = io("http://localhost:3001", { transports: ["websocket"] });
 
-  const messages = [...MessagePersonOne, ...MessagePersonTwo].sort((a, b) =>
-    a.createdAt.localeCompare(b.createdAt)
-  );
+function MessagesList() {
+  // let currentSender = "";
+
+  // const messages = [...MessagePersonOne, ...MessagePersonTwo].sort((a, b) =>
+  //   a.createdAt.localeCompare(b.createdAt)
+  // );
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.home.userInfo);
+  const currentChat = useSelector((state) => state.home.chats.active);
+
+  useEffect(() => {
+    socket.on("welcome", (welcomeMessage) => {
+      console.log(welcomeMessage);
+
+      socket.on("newMessage", (newMessage) => {
+        console.log(newMessage);
+        const payload = [currentChat._id, newMessage.message];
+        dispatch({
+          type: SET_CHATS_HISTORY,
+          payload: payload,
+        });
+        // dispatch({
+        //   type: SET_CHAT_HISTORY,
+        //   payload: payload,
+        // });
+      });
+    });
+  });
 
   return (
     <div className="d-flex flex-column convo-div">
-      {messages.map((message, index) => {
+      {/* {messages.map((message, index) => {
         const sender = MessagePersonOne.includes(message)
           ? "person-one-messages"
           : "person-two-messages";
@@ -49,7 +76,30 @@ function MessagesList() {
             </span>
           </div>
         );
-      })}
+      })} */}
+
+      <ul className="messages">
+        {currentChat.messages.map((message) => (
+          <li
+            key={message !== null && message._id}
+            className={
+              message !== null && message.user === currentUser._id
+                ? "sender-msg"
+                : "receiver-msg"
+            }
+          >
+            {message.user === currentUser._id ? (
+              <div>{currentUser.username}</div>
+            ) : (
+              <div>{message.user}</div>
+            )}
+            {message !== null && message.text}
+            <div className="message-time">
+              {formatTime(message !== null && message.createdAt)}
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

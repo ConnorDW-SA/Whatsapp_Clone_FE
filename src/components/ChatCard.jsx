@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ChatCard(props) {
   const chat = props.chat;
+
   const lastMessage = chat.messages && chat.messages[chat.messages.length - 1];
   const currentUser = useSelector((state) => state.home.userInfo);
   const accessToken = localStorage.getItem("accessToken");
   const targetUser =
     chat.length !== 0 &&
     chat.users.find((user) => user.username !== currentUser.username);
+
   const activeChat = useSelector((state) => state.home.chats.active);
 
   const dispatch = useDispatch();
@@ -19,8 +21,8 @@ function ChatCard(props) {
     try {
       const response = await fetch(`http://localhost:3001/chats/${chat._id}`, {
         headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
       if (response) {
         const data = await response.json();

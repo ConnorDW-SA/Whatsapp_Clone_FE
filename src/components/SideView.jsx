@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 function SideView() {
   const myProfile = useSelector((state) => state.home.myProfile);
-  console.log(myProfile);
 
   return (
     <div className="side-view">

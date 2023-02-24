@@ -6,8 +6,10 @@ function Dropdown(props) {
   return (
     <div>
       <ul className="dropdown-ul">
-        {textContent.map((text) => (
-          <li className="dropdown-li">{text}</li>
+        {textContent.map((text, index) => (
+          <li key={index} className="dropdown-li">
+            {text}
+          </li>
         ))}
       </ul>
     </div>
