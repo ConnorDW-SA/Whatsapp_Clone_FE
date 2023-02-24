@@ -77,15 +77,16 @@ function MessagesList() {
           </div>
         );
       })} */}
-      <div>Here are the messages</div>
-      <ul>
+
+      <ul className="messages">
         {currentChat.messages.map((message) => (
           <li
             className={
-              message.user === currentUser._id ? "li-white-bg" : "li-green-bg"
+              message.user === currentUser._id ? "sender-msg" : "receiver-msg"
             }
           >
             {message.text}
+            <div className="message-time">{formatTime(message.createdAt)}</div>
           </li>
         ))}
       </ul>
