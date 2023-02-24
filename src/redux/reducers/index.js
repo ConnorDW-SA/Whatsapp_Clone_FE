@@ -77,7 +77,8 @@ const mainReducer = (state = initialState, action) => {
         return state;
       }
 
-      const updatedList = state.chats.list[chatIndex].push(newMessage);
+      const updatedList = [...state.chats.list];
+      updatedList[chatIndex].messages.push(newMessage);
 
       return {
         ...state,
