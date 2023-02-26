@@ -177,7 +177,8 @@
 .chats-container {
   background-color: #f0f2f5;
   overflow: auto;
-  height: calc(100% - 108px);
+  height: calc(100vh - 108px);
+  /* height: 500px; */
   width: 100%;
   overflow: auto;
 }

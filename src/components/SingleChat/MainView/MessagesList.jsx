@@ -90,8 +90,8 @@ function MessagesList() {
             key={message !== null && message._id}
             className={
               message !== null && message.user === currentUser._id
-                ? "sender-msg"
-                : "receiver-msg"
+                ? "receiver-msg"
+                : "sender-msg"
             }
           >
             {message.user === currentUser._id ? (
